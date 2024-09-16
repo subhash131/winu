@@ -4,7 +4,7 @@ import { GiStaryu } from "react-icons/gi";
 
 const Navbar = () => {
   return (
-    <div className="w-full h-10 flex justify-between items-center fixed top-4 z-50 px-44">
+    <div className="w-full h-10 flex justify-between items-center fixed top-4 z-50 px-44 max-md:px-20">
       <div className="flex gap-2 size-full items-center">
         <GiStaryu size={20} />
         <h1 className="">Winu</h1>
