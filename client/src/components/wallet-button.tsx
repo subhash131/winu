@@ -14,7 +14,7 @@ const WalletButton = () => {
   return (
     <WalletMultiButton
       style={{
-        backgroundColor: "#000",
+        backgroundColor: "transparent",
       }}
     />
   );
