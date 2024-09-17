@@ -1,17 +1,22 @@
 import React from "react";
 import WalletButton from "./wallet-button";
 import { GiStaryu } from "react-icons/gi";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <div className="w-full h-10 flex justify-between items-center fixed top-4 z-50 px-44 max-md:px-20">
+    <div className="w-full h-fit min-h-12 flex justify-between items-center fixed z-50 px-36 max-md:px-20 backdrop-blur-md">
       <div className="flex gap-2 size-full items-center">
         <GiStaryu size={20} />
         <h1 className="">Winu</h1>
       </div>
       <ul className="flex items-center justify-center size-full gap-10 font-medium">
-        <li>Home</li>
-        <li>create</li>
+        <li>
+          <Link href="/home">Home</Link>
+        </li>
+        <li>
+          <Link href="/create">Create</Link>
+        </li>
       </ul>
       <div className="w-full justify-end items-center flex">
         <WalletButton />
