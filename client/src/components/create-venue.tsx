@@ -4,22 +4,22 @@ import Image from "next/image";
 import { IoIosImage } from "react-icons/io";
 import { DatePicker } from "./date-picket";
 import TimePicker from "./time-picker";
-import AddTeams from "./add-teams";
+import Teams from "./teams";
 
 const CreateVenue = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   return (
-    <main className=" w-screen h-screen overflow-hidden text-white relative pt-14">
+    <main className="size-full min-h-screen overflow-x-hidden text-white relative pt-14">
       <Overlay />
-      <div className="size-full px-36 flex pt-20">
-        <div className="w-[40%] h-full flex-shrink-0">
+      <div className="size-full px-36 flex pt-20 gap-14">
+        <div className="w-[40%] max-lg:w-[30%] h-full flex-shrink-0">
           <div className="relative w-fit cursor-pointer group border border-[#282828] hover:border-[#484848] rounded-xl">
             <Image
               src="/icon.svg"
               alt="image"
               width={10}
               height={10}
-              className="size-96 bg-[#282828] backdrop-blur-lg rounded-xl"
+              className="size-96 max-lg:size-80 max-md:size-60 bg-[#282828] backdrop-blur-lg rounded-xl"
             />
             <button className="absolute bottom-4 right-4 size-10 rounded-full bg-[#282828] flex items-center justify-center border border-gray-400 group-hover:bg-[#484848] transition-colors">
               <IoIosImage
@@ -29,7 +29,7 @@ const CreateVenue = () => {
             </button>
           </div>
         </div>
-        <div className="size-full flex flex-col gap-4">
+        <div className="size-full flex flex-col gap-4 ">
           <input
             ref={titleRef}
             className="text-4xl bg-transparent outline-none"
@@ -60,10 +60,10 @@ const CreateVenue = () => {
           </div>
           <textarea
             name="description"
-            className="bg-transparent font-normal outline-none border border-[#282828] resize-none rounded-lg p-2 text-xs h-32"
+            className="bg-transparent focus:border-active font-normal outline-none border border-inactive resize-none rounded-lg p-4 text-xs h-32 transition-colors"
             placeholder="add description"
           ></textarea>
-          <AddTeams />
+          <Teams />
         </div>
       </div>
     </main>
