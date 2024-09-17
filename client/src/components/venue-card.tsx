@@ -12,7 +12,7 @@ const VenueCard = () => {
         <div className="h-full w-0.5 border-r-2 border-dashed border-[#606062]"></div>
       </div>
       <div className="size-full px-10 py-2">
-        <div className="size-full border rounded-xl border-[#484848] bg-[#282828] cursor-pointer hover:border-[#686868] transition-colors max-w-[40rem]"></div>
+        <div className="size-full border rounded-xl border-[#484848] bg-[#282828] cursor-pointer hover:border-[#686868] transition-colors max-w-[85%]"></div>
       </div>
     </div>
   );
