@@ -6,10 +6,10 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <div className="w-full h-fit min-h-12 flex justify-between items-center fixed z-50 px-36 max-md:px-20 backdrop-blur-md">
-      <div className="flex gap-2 size-full items-center">
+      <Link href="/" className="flex gap-2 size-full items-center">
         <GiStaryu size={20} />
         <h1 className="">Winu</h1>
-      </div>
+      </Link>
       <ul className="flex items-center justify-center size-full gap-10 font-medium">
         <li>
           <Link href="/home">Home</Link>
