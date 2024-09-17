@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import SwitchVenue from "./features/switch-venues";
 
-const reducer = combineReducers({});
+const reducer = combineReducers({ SwitchVenue });
 
 export const store = configureStore({
   reducer,
