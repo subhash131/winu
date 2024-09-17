@@ -12,7 +12,6 @@ const CreateVenue = () => {
   return (
     <main className="size-full min-h-screen overflow-x-hidden text-white relative pt-14">
       <ModalEditTeam />
-
       <Overlay />
       <div className="size-full px-36 flex pt-20 gap-14 max-lg:px-10">
         <div className="w-[40%] max-lg:w-[30%] h-full flex-shrink-0">
@@ -66,6 +65,11 @@ const CreateVenue = () => {
             className="bg-transparent focus:border-active font-normal outline-none border border-inactive resize-none rounded-lg p-4 text-xs h-32 transition-colors"
             placeholder="add description"
           ></textarea>
+          <div className="w-full h-fit flex items-center justify-center">
+            <button className="bg-white text-black font-semibold px-10 py-2 rounded-lg">
+              Create venue
+            </button>
+          </div>
           <Teams />
         </div>
       </div>
