@@ -42,7 +42,6 @@ const CreateVenue = () => {
             ref={titleRef}
             className="text-xl bg-transparent outline-none"
             placeholder="Stream link"
-            autoFocus
           />
           <div className="h-28 w-fit backdrop-blur-lg bg-[rgba(40,40,40,0.6)] rounded-lg py-2 px-4 flex flex-col justify-between gap-2">
             <div className="w-full flex gap-4 items-center justify-between">
