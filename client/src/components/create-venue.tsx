@@ -1,13 +1,70 @@
-import React from "react";
-import Header from "./header";
-import VenueCard from "./venue-card";
+"use client";
+import React, { useRef } from "react";
+import Image from "next/image";
+import { IoIosImage } from "react-icons/io";
+import { DatePicker } from "./date-picket";
+import TimePicker from "./time-picker";
+import AddTeams from "./add-teams";
 
 const CreateVenue = () => {
+  const titleRef = useRef<HTMLInputElement>(null);
   return (
-    <main className=" w-screen h-screen overflow-hidden text-white relative">
+    <main className=" w-screen h-screen overflow-hidden text-white relative pt-14">
       <Overlay />
-      <div className="size-full px-36">
-        
+      <div className="size-full px-36 flex pt-20">
+        <div className="w-[40%] h-full flex-shrink-0">
+          <div className="relative w-fit cursor-pointer group border border-[#282828] hover:border-[#484848] rounded-xl">
+            <Image
+              src="/icon.svg"
+              alt="image"
+              width={10}
+              height={10}
+              className="size-96 bg-[#282828] backdrop-blur-lg rounded-xl"
+            />
+            <button className="absolute bottom-4 right-4 size-10 rounded-full bg-[#282828] flex items-center justify-center border border-gray-400 group-hover:bg-[#484848] transition-colors">
+              <IoIosImage
+                className="rounded-md text-white transition-colors"
+                size={22}
+              />
+            </button>
+          </div>
+        </div>
+        <div className="size-full flex flex-col gap-4">
+          <input
+            ref={titleRef}
+            className="text-4xl bg-transparent outline-none"
+            placeholder="Venue name"
+            autoFocus
+          />
+          <input
+            ref={titleRef}
+            className="text-xl bg-transparent outline-none"
+            placeholder="Stream link"
+            autoFocus
+          />
+          <div className="h-28 w-fit backdrop-blur-lg bg-[rgba(40,40,40,0.6)] rounded-lg py-2 px-4 flex flex-col justify-between gap-2">
+            <div className="w-full flex gap-4 items-center justify-between">
+              <p>Start</p>
+              <div className="flex items-center justify-center gap-4">
+                <DatePicker />
+                <TimePicker />
+              </div>
+            </div>
+            <div className="w-full flex gap-4 items-center justify-between">
+              <p>End</p>
+              <div className="flex items-center justify-center gap-4">
+                <DatePicker />
+                <TimePicker />
+              </div>
+            </div>
+          </div>
+          <textarea
+            name="description"
+            className="bg-transparent font-normal outline-none border border-[#282828] resize-none rounded-lg p-2 text-xs h-32"
+            placeholder="add description"
+          ></textarea>
+          <AddTeams />
+        </div>
       </div>
     </main>
   );
