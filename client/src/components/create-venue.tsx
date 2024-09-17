@@ -6,14 +6,8 @@ const CreateVenue = () => {
   return (
     <main className=" w-screen h-screen overflow-hidden text-white relative">
       <Overlay />
-      <div className="size-full top-0 left-0 z-10 pt-28 px-56 max-lg:px-20 ">
-        <Header />
-        <div className="h-full w-full overflow-scroll pb-32">
-          <VenueCard />
-          <VenueCard />
-          <VenueCard />
-          <VenueCard />
-        </div>
+      <div className="size-full px-36">
+        
       </div>
     </main>
   );
