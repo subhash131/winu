@@ -5,7 +5,7 @@ import { TbPhotoUp } from "react-icons/tb";
 import { DatePicker } from "./date-picket";
 import TimePicker from "./time-picker";
 import Teams from "./teams";
-import ModalEditTeam from "./edit-team-modal";
+import ModalEditTeam from "./modal-edit-team";
 
 const CreateVenue = () => {
   const titleRef = useRef<HTMLInputElement>(null);
