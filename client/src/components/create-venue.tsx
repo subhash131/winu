@@ -29,6 +29,10 @@ const CreateVenue = () => {
                 size={22}
               />
             </button>
+            <input
+              className="opacity-0 top-0 absolute z-10 size-full cursor-pointer"
+              type="file"
+            />
           </div>
         </div>
         <div className="size-full flex flex-col gap-4 ">
@@ -65,7 +69,7 @@ const CreateVenue = () => {
             placeholder="add description"
           ></textarea>
           <div className="w-full h-fit flex items-center justify-center">
-            <button className="bg-white text-black font-semibold px-10 py-2 rounded-lg">
+            <button className="bg-white text-black font-semibold px-10 py-2 rounded-lg active:scale-95 transition-transform">
               Create venue
             </button>
           </div>

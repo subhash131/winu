@@ -55,10 +55,10 @@ const TeamCard = () => {
         </div>
       </div>
       <button
-        className="size-10 flex-shrink-0 rounded-full border border-inactive grid place-content-center group text-inactive hover:text-active hover:border-active transition-colors"
+        className="size-10 flex-shrink-0 rounded-full border-inactive grid place-content-center group text-inactive hover:text-active hover:border-active transition-colors"
         onClick={handleToggleModal}
       >
-        <Edit size={15} />
+        <Edit size={20} />
       </button>
     </div>
   );
