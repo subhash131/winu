@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,8 +16,10 @@ const config: Config = {
         "gradient-glow":
           "linear-gradient(90deg, rgba(36,35,36,1) 0%, rgba(29,28,26,1) 50%, rgba(35,31,36,1) 100%)",
       },
+
+      colors: {},
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 export default config;
