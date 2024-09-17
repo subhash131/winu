@@ -17,7 +17,10 @@ const config: Config = {
           "linear-gradient(90deg, rgba(36,35,36,1) 0%, rgba(29,28,26,1) 50%, rgba(35,31,36,1) 100%)",
       },
 
-      colors: {},
+      colors: {
+        inactive: "#282828",
+        active: "#7c7c7c",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
