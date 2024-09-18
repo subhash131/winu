@@ -6,7 +6,7 @@ import CreateButton from "./create-button";
 import Teams from "../teams";
 import Description from "./description";
 import VenueImage from "./venue-image";
-import Title from "./title";
+import Title from "./name";
 import StreamLink from "./stream-link";
 
 const CreateVenue = () => {

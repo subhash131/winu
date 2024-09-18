@@ -19,7 +19,7 @@ const EndDatetime = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (date) dispatch(updateEndDate(date));
+    if (date) dispatch(updateEndDate(date.toISOString()));
   }, [date]);
 
   return (

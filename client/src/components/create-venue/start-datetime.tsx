@@ -19,7 +19,7 @@ const StartDatetime = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (date) dispatch(updateStartDate(date));
+    if (date) dispatch(updateStartDate(date.toISOString()));
   }, [date]);
 
   return (
