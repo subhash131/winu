@@ -4,6 +4,7 @@ import "./globals.css";
 import AppProvider from "@/providers/app-provider";
 import Navbar from "@/components/navbar";
 import "@solana/wallet-adapter-react-ui/styles.css";
+import AuthProvider from "@/providers/auth-provider";
 
 export const metadata: Metadata = {
   title: "Winu",
@@ -25,10 +26,12 @@ export default function RootLayout({
       <body
         className={`${poppins.className} bg-black text-white font-semibold`}
       >
-        <AppProvider>
-          <Navbar />
-          {children}
-        </AppProvider>
+        <AuthProvider>
+          <AppProvider>
+            <Navbar />
+            {children}
+          </AppProvider>
+        </AuthProvider>
       </body>
     </html>
   );
