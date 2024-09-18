@@ -1,4 +1,3 @@
-"use server";
 import mongoose from "mongoose";
 
 export const connection: {
@@ -11,27 +10,18 @@ async function connect() {
   if (connection.isConnected) {
     return;
   }
-  if (mongoose.connections.length > 0) {
-    connection.isConnected = mongoose.connections[0].readyState === 1;
-    if (connection.isConnected) {
-      return;
-    }
-    await mongoose.disconnect();
-  }
   const mongoUrl = process.env.MONGO_URL;
   if (!mongoUrl) {
-    throw new Error("Mongo URL Not found");
+    console.log("Mongo URL Not found");
+    return;
   }
   try {
     const db = await mongoose.connect(mongoUrl);
-    connection.isConnected = db.connections[0].readyState === 1;
-    mongoose.connection.on("error", (err) => {
-      console.log("Mongodb Connection failed", err);
-      process.exit();
-      connection.isConnected = false;
-    });
+    if (db.connections[0].readyState) {
+      connection.isConnected = true;
+    }
   } catch (err) {
-    console.log("🚀 ~ connection ~ err:", err);
+    console.log("Mongo connection failed:", err);
   }
 }
 
