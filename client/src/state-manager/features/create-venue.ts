@@ -1,25 +1,24 @@
 import { getTime } from "@/helpers/get-time";
+import { TVenue } from "@/types/venue";
 import { createSlice } from "@reduxjs/toolkit";
 
-type CreateVenue = {
+type CreateVenue = Omit<TVenue, "startDate" | "endDate" | "createdBy"> & {
   modalActive: boolean;
-  startDate: Date;
+  startDate: string;
   startTime: string;
-  endDate: Date;
+  endDate: string;
   endTime: string;
-  description?: string;
-  title: string;
-  streamLink: string;
+  id?: string;
 };
 
 const initialState: CreateVenue = {
   modalActive: false,
-  startDate: new Date(),
+  startDate: new Date().toISOString(),
   startTime: getTime("START_TIME"),
   endTime: getTime("END_TIME"),
-  endDate: new Date(),
+  endDate: new Date().toISOString(),
   streamLink: "",
-  title: "",
+  name: "",
   description: "",
 };
 
@@ -30,10 +29,10 @@ const createVenue = createSlice({
     toggleModalActive: create.reducer((state) => {
       state.modalActive = !state.modalActive;
     }),
-    updateStartDate: create.reducer<Date>((state, action) => {
+    updateStartDate: create.reducer<string>((state, action) => {
       state.startDate = action.payload;
     }),
-    updateEndDate: create.reducer<Date>((state, action) => {
+    updateEndDate: create.reducer<string>((state, action) => {
       state.endDate = action.payload;
     }),
     updateStartTime: create.reducer<string>((state, action) => {
@@ -42,14 +41,17 @@ const createVenue = createSlice({
     updateEndTime: create.reducer<string>((state, action) => {
       state.endTime = action.payload;
     }),
-    updateTitle: create.reducer<string>((state, action) => {
-      state.title = action.payload;
+    updateName: create.reducer<string>((state, action) => {
+      state.name = action.payload;
     }),
     updateDescription: create.reducer<string>((state, action) => {
       state.description = action.payload;
     }),
     updateStreamLink: create.reducer<string>((state, action) => {
       state.streamLink = action.payload;
+    }),
+    updateVenueId: create.reducer<string>((state, action) => {
+      state.id = action.payload;
     }),
   }),
 });
@@ -62,6 +64,7 @@ export const {
   updateEndDate,
   updateDescription,
   updateStreamLink,
-  updateTitle,
+  updateName,
+  updateVenueId,
 } = createVenue.actions;
 export default createVenue.reducer;
