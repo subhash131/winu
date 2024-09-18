@@ -1,22 +1,14 @@
 import mongoose, { Document, Schema } from "mongoose";
+import { TVenue } from "@/types/venue";
 
-interface IVenue extends Document {
-  name: string;
-  startDate: Date;
-  endDate: Date;
-  imageUrl: string;
-  streamLink: string;
-  description: string;
-  teams: mongoose.Types.ObjectId[];
-  createdBy: mongoose.Types.ObjectId;
-}
+export interface IVenue extends Document, TVenue {}
 
 const VenueSchema: Schema<IVenue> = new Schema(
   {
     name: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    createdBy: { type: mongoose.Schema.Types.ObjectId, required: true },
+    createdBy: { type: String, required: true },
     imageUrl: { type: String, default: "/icon.svg" },
     streamLink: { type: String },
     description: { type: String },

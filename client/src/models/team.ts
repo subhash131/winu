@@ -1,12 +1,8 @@
 import mongoose, { Document, Schema } from "mongoose";
 import Player from "./player";
+import { TTeam } from "@/types/team";
 
-export interface ITeam extends Document {
-  name: string;
-  imageUrl: string;
-  description: string;
-  players: mongoose.Types.ObjectId[];
-}
+export interface ITeam extends Document, TTeam {}
 
 const Team: Schema<ITeam> = new Schema(
   {
