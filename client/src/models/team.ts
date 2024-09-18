@@ -1,11 +1,11 @@
 import mongoose, { Document, Schema } from "mongoose";
-import Player, { IPlayer } from "./player";
+import Player from "./player";
 
 export interface ITeam extends Document {
   name: string;
   imageUrl: string;
   description: string;
-  players: IPlayer[];
+  players: mongoose.Types.ObjectId[];
 }
 
 const Team: Schema<ITeam> = new Schema(
@@ -17,7 +17,7 @@ const Team: Schema<ITeam> = new Schema(
     },
     imageUrl: { type: String },
     description: { type: String },
-    players: [{ type: mongoose.Types.ObjectId, ref: Player }],
+    players: [{ type: mongoose.Schema.Types.ObjectId, ref: Player }],
   },
   { timestamps: true }
 );
