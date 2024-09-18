@@ -10,12 +10,11 @@ export async function POST(req: NextRequest) {
     console.log("🚀 ~ POST ~ reqBody:", reqBody);
     const { name, startDate, endDate, imageUrl, streamLink, description } =
       reqBody;
-    console.log("🚀 ~ POST ~ startDate:", startDate);
 
     const newVenue = new Venue({
       name,
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: new Date(startDate),
+      endDate: new Date(endDate),
       imageUrl,
       streamLink,
       description,
