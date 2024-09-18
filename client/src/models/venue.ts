@@ -16,7 +16,7 @@ const Venue: Schema<IVenue> = new Schema(
     name: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    imageUrl: { type: String },
+    imageUrl: { type: String, default: "/icon.svg" },
     streamLink: { type: String },
     description: { type: String },
     teams: [{ type: mongoose.Types.ObjectId, ref: Team }],
