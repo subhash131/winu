@@ -5,6 +5,7 @@ import AppProvider from "@/providers/app-provider";
 import Navbar from "@/components/navbar";
 import "@solana/wallet-adapter-react-ui/styles.css";
 import AuthProvider from "@/providers/auth-provider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Winu",
@@ -29,6 +30,7 @@ export default function RootLayout({
         <AuthProvider>
           <AppProvider>
             <Navbar />
+            <Toaster />
             {children}
           </AppProvider>
         </AuthProvider>
