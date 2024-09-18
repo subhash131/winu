@@ -1,6 +1,9 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 
 const TimePicker = () => {
+  const [time, setTime] = useState<string>();
+
   return (
     <form className="max-w-[10rem] w-[120px] mx-auto">
       <div className="relative">
@@ -11,6 +14,8 @@ const TimePicker = () => {
           min="09:00"
           max="18:00"
           required
+          onChange={(e) => setTime(e.target.value)}
+          value={time}
         />
       </div>
     </form>
