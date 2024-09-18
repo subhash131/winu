@@ -8,7 +8,7 @@ const VenueSchema: Schema<IVenue> = new Schema(
     name: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    createdBy: { type: String, required: true },
+    createdBy: { type: String, required: true, default: "unknown" },
     imageUrl: { type: String, default: "/icon.svg" },
     streamLink: { type: String },
     description: { type: String },
