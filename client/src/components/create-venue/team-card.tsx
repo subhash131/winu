@@ -44,7 +44,10 @@ const TeamCard = ({
   };
 
   return (
-    <div className="w-72 h-16 border-inactive border hover:border-active transition-colors rounded-lg flex items-center justify-between px-4 py-2 gap-4">
+    <div
+      className="w-72 h-16 border-inactive border hover:border-active transition-colors rounded-lg flex items-center justify-between px-4 py-2 gap-4 cursor-pointer group"
+      onClick={handleToggleModal}
+    >
       <div className="size-10 rounded-lg border border-inactive flex-shrink-0">
         <Image
           src={imageUrl || "/icon.svg"}
@@ -72,10 +75,7 @@ const TeamCard = ({
           })}
         </div>
       </div>
-      <button
-        className="size-10 flex-shrink-0 rounded-full border-inactive grid place-content-center group text-inactive hover:text-active hover:border-active transition-colors"
-        onClick={handleToggleModal}
-      >
+      <button className="size-10 flex-shrink-0 rounded-full border-inactive grid place-content-center group text-inactive group-hover:text-active hover:border-active transition-colors">
         <Edit size={20} />
       </button>
     </div>
