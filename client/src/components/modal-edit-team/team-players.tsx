@@ -13,7 +13,7 @@ const TeamPlayers = () => {
           <PlayerCard
             key={`player-card-${idx}`}
             username={username}
-            imageUrl={imageUrl}
+            imageUrl={imageUrl || "/icon.svg"}
             index={idx}
           />
         );

@@ -1,8 +1,14 @@
 import { getTime } from "@/helpers/get-time";
 import { TTeam } from "@/types/team";
 import { TVenue } from "@/types/venue";
+import { v4 as uuidv4 } from "uuid";
 
 import { createSlice } from "@reduxjs/toolkit";
+import { TPlayer } from "@/types/player";
+
+type TeamWithPlayers = {
+  players: TPlayer[];
+} & Omit<TTeam, "players">;
 
 type CreateVenue = Omit<
   TVenue,
@@ -15,7 +21,7 @@ type CreateVenue = Omit<
   endTime: string;
   id?: string;
   imageUrl?: string;
-  teams: TTeam[];
+  teams: TeamWithPlayers[];
 };
 
 const initialState: CreateVenue = {
@@ -28,7 +34,11 @@ const initialState: CreateVenue = {
   streamLink: "",
   name: "",
   description: "",
-  teams: [{ name: "Team 1" }, { name: "Team 2" }, { name: "Team 3" }],
+  teams: [
+    { name: "Team 1", id: "1", players: [{ username: "" }] },
+    { name: "Team 2", id: "2", players: [{ username: "" }] },
+    { name: "Team 3", id: "3", players: [{ username: "" }] },
+  ],
 };
 
 const createVenue = createSlice({
@@ -71,7 +81,11 @@ const createVenue = createSlice({
     addNewTeam: create.reducer((state) => {
       state.teams = [
         ...state.teams,
-        { name: "New Team", imageUrl: "/icon.svg" },
+        {
+          id: uuidv4(),
+          name: `Team ${state.teams.length + 1}`,
+          players: [{ username: "" }],
+        },
       ];
     }),
   }),

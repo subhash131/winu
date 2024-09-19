@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const TeamName = () => {
   const { name } = useSelector((state: RootState) => state.TeamForm);
+  console.log("🚀 ~ TeamName ~ name:", name);
   const dispatch = useDispatch();
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(updateTeamName(e.target.value));
@@ -14,7 +15,7 @@ const TeamName = () => {
     <input
       className="text-xl font-semibold bg-transparent outline-none"
       placeholder="Team name"
-      name={name}
+      value={name}
       onChange={handleNameChange}
     />
   );

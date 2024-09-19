@@ -1,25 +1,46 @@
 "use client";
-import mongoose from "mongoose";
 import { toggleModalActive } from "@/state-manager/features/create-venue-form";
 import { Edit } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateActiveTeam } from "@/state-manager/features/team-form";
+import { TPlayer } from "@/types/player";
+import { RootState } from "@/state-manager/store";
 
 const TeamCard = ({
   name,
   description,
   imageUrl,
   players,
+  id,
+  venueId,
 }: {
   name: string;
   description?: string;
-  players?: mongoose.Types.ObjectId[];
+  players: TPlayer[];
   imageUrl?: string;
+  id: string;
+  venueId: string;
 }) => {
+  const { name: TeamFormName } = useSelector(
+    (state: RootState) => state.TeamForm
+  );
   const dispatch = useDispatch();
   const handleToggleModal = () => {
+    console.log("🚀 ~ TeamFormName:", TeamFormName);
+    console.log("name ::", name);
     dispatch(toggleModalActive());
+    dispatch(
+      updateActiveTeam({
+        activeTeamId: id,
+        imageUrl: imageUrl || "/icon.svg",
+        name,
+        players,
+        venueId,
+      })
+    );
+    console.log("🚀 ~ TeamFormName:", TeamFormName);
   };
 
   return (
@@ -36,11 +57,11 @@ const TeamCard = ({
       </div>
       <div className="size-full flex flex-col items-start justify-center">
         <p>{name}</p>
-        {/* <div className="flex">
+        <div className="flex">
           {players?.map(({ imageUrl }, idx) => {
             return (
               <Image
-                src={imageUrl}
+                src={imageUrl || "/icon.svg"}
                 alt="players"
                 className="size-4 rounded-full border border-active"
                 width={10}
@@ -49,7 +70,7 @@ const TeamCard = ({
               />
             );
           })}
-        </div> */}
+        </div>
       </div>
       <button
         className="size-10 flex-shrink-0 rounded-full border-inactive grid place-content-center group text-inactive hover:text-active hover:border-active transition-colors"

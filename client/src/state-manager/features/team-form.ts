@@ -2,7 +2,7 @@ import { TPlayer } from "@/types/player";
 import { createSlice } from "@reduxjs/toolkit";
 
 type Team = {
-  id?: string;
+  activeTeamId?: string;
   venueId?: string;
   imageUrl?: string;
   name: string;
@@ -10,6 +10,7 @@ type Team = {
 };
 
 const initialState: Team = {
+  activeTeamId: "1",
   players: [
     { username: "player1", imageUrl: "", description: "" },
     { username: "", imageUrl: "", description: "" },
@@ -21,17 +22,24 @@ const teamForm = createSlice({
   name: "Team Form",
   initialState,
   reducers: (create) => ({
-    updateVenueId: create.reducer<string>((state, action) => {
-      state.venueId = action.payload;
-    }),
     updatePlayers: create.reducer<TPlayer[]>((state, action) => {
       state.players = action.payload;
     }),
     updateTeamImageUrl: create.reducer<string>((state, action) => {
       state.imageUrl = action.payload;
     }),
-    updateTeamId: create.reducer<string>((state, action) => {
-      state.id = action.payload;
+    updateActiveTeam: create.reducer<{
+      activeTeamId: string;
+      players: TPlayer[];
+      name: string;
+      imageUrl: string;
+      venueId: string;
+    }>((state, action) => {
+      state.activeTeamId = action.payload.activeTeamId;
+      state.players = action.payload.players;
+      state.name = action.payload.name;
+      state.imageUrl = action.payload.imageUrl;
+      state.venueId = action.payload.venueId;
     }),
     updateTeamName: create.reducer<string>((state, action) => {
       state.name = action.payload;
@@ -40,9 +48,8 @@ const teamForm = createSlice({
 });
 
 export const {
-  updateVenueId,
   updatePlayers,
-  updateTeamId,
+  updateActiveTeam,
   updateTeamImageUrl,
   updateTeamName,
 } = teamForm.actions;
