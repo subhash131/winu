@@ -4,11 +4,14 @@ import { createSlice } from "@reduxjs/toolkit";
 type Team = {
   id?: string;
   venueId?: string;
+  imageUrl?: string;
+  name: string;
   players: TPlayer[];
 };
 
 const initialState: Team = {
   players: [],
+  name: "",
 };
 
 const venues = createSlice({

@@ -1,8 +1,13 @@
 import { getTime } from "@/helpers/get-time";
+import { TTeam } from "@/types/team";
 import { TVenue } from "@/types/venue";
+
 import { createSlice } from "@reduxjs/toolkit";
 
-type CreateVenue = Omit<TVenue, "startDate" | "endDate" | "createdBy"> & {
+type CreateVenue = Omit<
+  TVenue,
+  "startDate" | "endDate" | "createdBy" | "teams"
+> & {
   modalActive: boolean;
   startDate: string;
   startTime: string;
@@ -10,6 +15,7 @@ type CreateVenue = Omit<TVenue, "startDate" | "endDate" | "createdBy"> & {
   endTime: string;
   id?: string;
   imageUrl?: string;
+  teams: TTeam[];
 };
 
 const initialState: CreateVenue = {
@@ -21,6 +27,7 @@ const initialState: CreateVenue = {
   streamLink: "",
   name: "",
   description: "",
+  teams: [{ name: "Team 1" }, { name: "Team 2" }],
 };
 
 const createVenue = createSlice({
@@ -57,6 +64,9 @@ const createVenue = createSlice({
     updateImageUrl: create.reducer<string>((state, action) => {
       state.imageUrl = action.payload;
     }),
+    updateTeams: create.reducer<CreateVenue["teams"]>((state, action) => {
+      state.teams = action.payload;
+    }),
   }),
 });
 
@@ -71,5 +81,6 @@ export const {
   updateName,
   updateVenueId,
   updateImageUrl,
+  updateTeams,
 } = createVenue.actions;
 export default createVenue.reducer;

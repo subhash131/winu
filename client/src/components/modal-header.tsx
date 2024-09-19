@@ -1,4 +1,4 @@
-import { toggleModalActive } from "@/state-manager/features/create-venue";
+import { toggleModalActive } from "@/state-manager/features/create-venue-form";
 import React from "react";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
