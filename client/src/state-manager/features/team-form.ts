@@ -10,12 +10,15 @@ type Team = {
 };
 
 const initialState: Team = {
-  players: [],
-  name: "",
+  players: [
+    { username: "", imageUrl: "", description: "" },
+    { username: "", imageUrl: "", description: "" },
+  ],
+  name: "Demo",
 };
 
-const venues = createSlice({
-  name: "Venues",
+const teamForm = createSlice({
+  name: "Team Form",
   initialState,
   reducers: (create) => ({
     updateVenueId: create.reducer<string>((state, action) => {
@@ -24,8 +27,23 @@ const venues = createSlice({
     updatePlayers: create.reducer<TPlayer[]>((state, action) => {
       state.players = action.payload;
     }),
+    updateTeamImageUrl: create.reducer<string>((state, action) => {
+      state.imageUrl = action.payload;
+    }),
+    updateTeamId: create.reducer<string>((state, action) => {
+      state.id = action.payload;
+    }),
+    updateTeamName: create.reducer<string>((state, action) => {
+      state.name = action.payload;
+    }),
   }),
 });
 
-export const { updateVenueId } = venues.actions;
-export default venues.reducer;
+export const {
+  updateVenueId,
+  updatePlayers,
+  updateTeamId,
+  updateTeamImageUrl,
+  updateTeamName,
+} = teamForm.actions;
+export default teamForm.reducer;

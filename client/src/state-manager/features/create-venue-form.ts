@@ -19,6 +19,7 @@ type CreateVenue = Omit<
 };
 
 const initialState: CreateVenue = {
+  id: "remove",
   modalActive: false,
   startDate: new Date().toISOString(),
   startTime: getTime("START_TIME"),
@@ -67,10 +68,17 @@ const createVenue = createSlice({
     updateTeams: create.reducer<CreateVenue["teams"]>((state, action) => {
       state.teams = action.payload;
     }),
+    addNewTeam: create.reducer((state) => {
+      state.teams = [
+        ...state.teams,
+        { name: "New Team", imageUrl: "/icon.svg" },
+      ];
+    }),
   }),
 });
 
 export const {
+  addNewTeam,
   toggleModalActive,
   updateStartDate,
   updateStartTime,
