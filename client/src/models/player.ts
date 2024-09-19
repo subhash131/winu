@@ -8,7 +8,6 @@ const Player: Schema<IPlayer> = new Schema(
     username: {
       type: String,
       required: [true, "username is missing"],
-      unique: true,
     },
     imageUrl: { type: String },
     description: { type: String },
