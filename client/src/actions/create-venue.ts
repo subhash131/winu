@@ -22,7 +22,7 @@ export async function createVenue({
   };
   try {
     console.log("createdBy", createdBy);
-    const res = await fetch("http://localhost:3000/api/create-venue", {
+    const res = await fetch("http://localhost:3000/api/venue", {
       method: "POST",
       body: JSON.stringify(body),
       cache: "no-store",

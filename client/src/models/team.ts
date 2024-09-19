@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 import Player from "./player";
 import { TTeam } from "@/types/team";
 
-export interface ITeam extends Document, TTeam {}
+export interface ITeam extends Document, Omit<TTeam, "id"> {}
 
 const Team: Schema<ITeam> = new Schema(
   {
