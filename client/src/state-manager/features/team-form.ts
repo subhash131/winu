@@ -11,7 +11,7 @@ type Team = {
 
 const initialState: Team = {
   players: [
-    { username: "", imageUrl: "", description: "" },
+    { username: "player1", imageUrl: "", description: "" },
     { username: "", imageUrl: "", description: "" },
   ],
   name: "Demo",
