@@ -9,7 +9,7 @@ const Teams = () => {
   const { id, teams } = useSelector((state: RootState) => state.CreateVenue);
   if (!id) return;
   return (
-    <div className="pt-4 h-fit w-full">
+    <div className="pt-4 h-fit w-full px-36">
       <h3 className="text-2xl pb-6 ">Add Teams</h3>
       <div className="w-full h-fit grid [grid-template-columns:repeat(auto-fit,minmax(300px,1fr))] gap-4">
         {teams?.map(({ name, players, imageUrl, description }, idx) => {

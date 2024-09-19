@@ -44,12 +44,7 @@ const VenueImage = () => {
           size={22}
         />
       </button>
-      <input
-        className="opacity-0 top-0 absolute z-10 size-full cursor-pointer"
-        type="file"
-        accept="image/*"
-        onChange={uploadImage}
-      />
+
       {uploadProgress > 0 && uploadProgress != 100 && (
         <div className="absolute left-0 bottom-0 size-full bg-[rgba(200,200,200,0.4)] flex items-center justify-center p-10">
           <div className="w-full h-2 rounded-full border">
@@ -61,6 +56,12 @@ const VenueImage = () => {
           {uploadProgress}
         </div>
       )}
+      <input
+        className="opacity-0 top-0 absolute size-full cursor-pointer"
+        type="file"
+        accept="image/*"
+        onChange={uploadImage}
+      />
     </div>
   );
 };

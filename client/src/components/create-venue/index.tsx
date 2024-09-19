@@ -12,10 +12,10 @@ import { Overlay } from "./overlay";
 
 const CreateVenue = () => {
   return (
-    <main className="size-full min-h-screen overflow-x-hidden text-white relative pt-10 pb-28">
+    <main className="size-full min-h-screen overflow-x-hidden text-white relative pt-10 pb-28 flex flex-col gap-10 ">
       <ModalEditTeam />
       <Overlay />
-      <div className="size-full px-36 flex pt-20 gap-14 max-lg:px-10">
+      <div className="size-full px-36 flex pt-20 gap-14 max-lg:px-10 ">
         <div className="w-[40%] max-lg:w-[30%] h-full flex-shrink-0">
           <VenueImage />
         </div>
@@ -30,9 +30,9 @@ const CreateVenue = () => {
           <div className="w-full h-fit flex items-center justify-center">
             <CreateButton />
           </div>
-          <Teams />
         </div>
       </div>
+      <Teams />
     </main>
   );
 };

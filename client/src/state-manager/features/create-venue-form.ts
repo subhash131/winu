@@ -28,7 +28,7 @@ const initialState: CreateVenue = {
   streamLink: "",
   name: "",
   description: "",
-  teams: [{ name: "Team 1" }, { name: "Team 2" }],
+  teams: [{ name: "Team 1" }, { name: "Team 2" }, { name: "Team 3" }],
 };
 
 const createVenue = createSlice({
