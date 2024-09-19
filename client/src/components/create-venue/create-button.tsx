@@ -18,6 +18,7 @@ const CreateButton = () => {
     name,
     description,
     imageUrl,
+    id,
   } = useSelector((state: RootState) => state.CreateVenue);
   const dispatch = useDispatch();
   const { user } = useUser();
@@ -45,7 +46,7 @@ const CreateButton = () => {
         });
         if (res) {
           dispatch(updateVenueId(res._id));
-          toast.success("Venue create..! Please include players..");
+          toast.success("Venue created..! Add Teams..");
         }
       });
     } catch (err) {
@@ -53,6 +54,7 @@ const CreateButton = () => {
     }
   };
 
+  if (id) return;
   return (
     <button
       className="bg-white text-black font-semibold px-10 py-2 rounded-lg active:scale-95 transition-transform disabled:bg-gray-300 disabled:scale-100"

@@ -3,7 +3,7 @@ import ModalEditTeam from "../modal-edit-team";
 import StartDatetime from "./start-datetime";
 import EndDatetime from "./end-datetime";
 import CreateButton from "./create-button";
-import Teams from "../teams";
+import Teams from "./add-teams";
 import Description from "./description";
 import VenueImage from "./venue-image";
 import Title from "./name";
@@ -40,7 +40,7 @@ export default CreateVenue;
 
 const Overlay = () => {
   return (
-    <div className="absolute size-full -z-10">
+    <div className="fixed size-full top-0 overflow-hidden -z-10">
       <div
         className={`bg-gradient-glow size-72 blur-2xl after:absolute after:w-[90%] after:h-[80%] after:top-[25%] after:left-0 after:bg-gradient-glow after:blur-2xl absolute left-[40%] rounded-b-full after:rounded-b-full top-64`}
       />
