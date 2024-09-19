@@ -9,6 +9,7 @@ type CreateVenue = Omit<TVenue, "startDate" | "endDate" | "createdBy"> & {
   endDate: string;
   endTime: string;
   id?: string;
+  imageUrl?: string;
 };
 
 const initialState: CreateVenue = {
@@ -53,6 +54,9 @@ const createVenue = createSlice({
     updateVenueId: create.reducer<string>((state, action) => {
       state.id = action.payload;
     }),
+    updateImageUrl: create.reducer<string>((state, action) => {
+      state.imageUrl = action.payload;
+    }),
   }),
 });
 
@@ -66,5 +70,6 @@ export const {
   updateStreamLink,
   updateName,
   updateVenueId,
+  updateImageUrl,
 } = createVenue.actions;
 export default createVenue.reducer;
