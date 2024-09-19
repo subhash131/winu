@@ -1,7 +1,7 @@
 "use client";
 import { createVenue } from "@/actions/create-venue";
 import { combineDateAndTime } from "@/helpers/combine-date-time";
-import { updateVenueId } from "@/state-manager/features/create-venue";
+import { updateVenueId } from "@/state-manager/features/create-venue-form";
 import { RootState } from "@/state-manager/store";
 import { useUser } from "@clerk/nextjs";
 import React, { useState, useTransition } from "react";

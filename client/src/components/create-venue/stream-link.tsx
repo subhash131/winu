@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { updateStreamLink } from "@/state-manager/features/create-venue";
+import { updateStreamLink } from "@/state-manager/features/create-venue-form";
 import { RootState } from "@/state-manager/store";
 import { useDispatch, useSelector } from "react-redux";
 

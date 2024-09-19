@@ -1,5 +1,5 @@
 "use client";
-import { updateName } from "@/state-manager/features/create-venue";
+import { updateName } from "@/state-manager/features/create-venue-form";
 import { RootState } from "@/state-manager/store";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";

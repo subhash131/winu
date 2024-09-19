@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { updateEndDate } from "@/state-manager/features/create-venue";
+import { updateEndDate } from "@/state-manager/features/create-venue-form";
 import StartTimePicker from "./time-picker";
 
 const EndDatetime = () => {

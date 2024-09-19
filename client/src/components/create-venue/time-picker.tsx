@@ -2,7 +2,7 @@
 import {
   updateEndTime,
   updateStartTime,
-} from "@/state-manager/features/create-venue";
+} from "@/state-manager/features/create-venue-form";
 import { RootState } from "@/state-manager/store";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

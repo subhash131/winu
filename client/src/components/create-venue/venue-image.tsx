@@ -1,6 +1,6 @@
 "use client";
 import { useFileStore } from "@/providers/file-storage-provider";
-import { updateImageUrl } from "@/state-manager/features/create-venue";
+import { updateImageUrl } from "@/state-manager/features/create-venue-form";
 import Image from "next/image";
 import React, { ChangeEvent, useState } from "react";
 import { TbPhotoUp } from "react-icons/tb";
