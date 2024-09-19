@@ -2,6 +2,7 @@ import { RootState } from "@/state-manager/store";
 import React from "react";
 import { useSelector } from "react-redux";
 import PlayerCard from "./player-card";
+import AddNewPlayer from "./add-new-player";
 
 const TeamPlayers = () => {
   const { players } = useSelector((state: RootState) => state.TeamForm);
@@ -17,6 +18,7 @@ const TeamPlayers = () => {
           />
         );
       })}
+      <AddNewPlayer />
     </div>
   );
 };
