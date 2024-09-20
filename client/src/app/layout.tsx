@@ -10,7 +10,7 @@ import { FileStoreProvider } from "@/providers/file-storage-provider";
 
 export const metadata: Metadata = {
   title: "Winu",
-  description: "Play Fantasy e-sports games",
+  description: "Play and Earn with Fantasy e-sports games",
 };
 
 const poppins = Poppins({
