@@ -9,7 +9,6 @@ const Team: Schema<ITeam> = new Schema(
     name: {
       type: String,
       required: [true, "username is missing"],
-      unique: true,
     },
     imageUrl: { type: String },
     description: { type: String },
