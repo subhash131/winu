@@ -1,6 +1,7 @@
 "use server";
 
 import { TPlayer } from "@/types/player";
+import { createMultiplePlayers } from "./create-multiple-players";
 
 type Team = {
   activeTeamId?: string;
@@ -10,25 +11,33 @@ type Team = {
   players: TPlayer[];
 };
 
-export async function createVenue({
+export async function createTeam({
   imageUrl,
   name,
   players,
   activeTeamId,
   venueId,
 }: Team) {
+  const playersId: any = [];
+
   const body = {
     imageUrl,
     name,
+    players: playersId,
   };
+
   if (players?.length > 0) {
     try {
-      const res = await fetch("http://localhost:3000/api/bulk/player", {
-        method: "POST",
-        body: JSON.stringify(players),
-        cache: "no-store",
-      });
-    } catch (err) {}
+      const res = await createMultiplePlayers({ players });
+      if (res) {
+        res.map((player: any) => {
+          playersId.push(player._id);
+        });
+      }
+      console.log("🚀 ~ res:", res);
+    } catch (err) {
+      console.log("🚀 ~ err:", err);
+    }
   }
 
   try {

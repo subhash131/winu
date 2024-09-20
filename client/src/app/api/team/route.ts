@@ -13,8 +13,8 @@ export async function POST(req: NextRequest) {
     const newTeam = new Team({
       description,
       name,
-      imageUrl: "",
-      players: [],
+      imageUrl: imageUrl || "/icon.svg",
+      players,
     });
     const res = await newTeam.save();
     return NextResponse.json({ ...res._doc }, { status: 201 });
