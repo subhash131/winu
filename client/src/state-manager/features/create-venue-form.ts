@@ -10,7 +10,7 @@ export type TeamWithPlayers = {
   players: TPlayer[];
 } & Omit<TTeam, "players">;
 
-type CreateVenue = Omit<
+export type CreateVenue = Omit<
   TVenue,
   "startDate" | "endDate" | "createdBy" | "teams"
 > & {

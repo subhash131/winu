@@ -1,11 +1,13 @@
-import { Venue, venues } from "@/constants/venues";
 import { createSlice } from "@reduxjs/toolkit";
+import { CreateVenue } from "./create-venue-form";
+
+type Venue = Omit<CreateVenue, "modalActive" | "activeTeamId"> & {};
 
 type VenuesState = {
   venues: Venue[];
 };
 
-const initialState: VenuesState = { venues };
+const initialState: VenuesState = { venues: [] };
 
 const createVenue = createSlice({
   name: "Venues",
