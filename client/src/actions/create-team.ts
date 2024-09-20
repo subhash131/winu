@@ -1,6 +1,14 @@
 "use server";
 
-import { Team } from "@/state-manager/features/team-form";
+import { TPlayer } from "@/types/player";
+
+type Team = {
+  activeTeamId?: string;
+  venueId?: string;
+  imageUrl?: string;
+  name: string;
+  players: TPlayer[];
+};
 
 export async function createVenue({
   imageUrl,

@@ -1,7 +1,7 @@
 import { TPlayer } from "@/types/player";
 import mongoose, { Document, Schema } from "mongoose";
 
-export interface IPlayer extends Document, TPlayer {}
+export interface IPlayer extends Document, Omit<TPlayer, "id"> {}
 
 const Player: Schema<IPlayer> = new Schema(
   {

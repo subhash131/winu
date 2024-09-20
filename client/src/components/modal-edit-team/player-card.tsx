@@ -1,38 +1,44 @@
 "use client";
-import { updatePlayers } from "@/state-manager/features/team-form";
+import { updateATeamPlayer } from "@/state-manager/features/create-venue-form";
 import { RootState } from "@/state-manager/store";
 import Image from "next/image";
-import React from "react";
 import { TbPhotoUp } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 
-const PlayerCard = ({
+export const PlayerCard = ({
   imageUrl,
   index,
   username,
+  id,
 }: {
   username: string;
   imageUrl: string;
+  id: string;
   index: number;
 }) => {
-  const { players } = useSelector((state: RootState) => state.TeamForm);
+  const { activeTeamId } = useSelector((state: RootState) => state.CreateVenue);
   const dispatch = useDispatch();
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const updatedPlayers = players.map((player, i) =>
-      i === index ? { ...player, username: e.target.value } : player
+    dispatch(
+      updateATeamPlayer({
+        playerId: id,
+        playerName: e.target.value,
+        teamId: activeTeamId!,
+      })
     );
-    dispatch(updatePlayers(updatedPlayers));
   };
+
   return (
     <div className="border h-16 rounded-lg border-inactive flex items-center justify-start gap-4 px-2">
-      <div className="relative w-fit cursor-pointer group border border-[#282828] hover:border-[#484848] rounded-xl flex items-center justify-center group flex-shrink-0 overflow-hidden">
+      <div className="relative w-10 flex-shrink-0 h-10 cursor-pointer group border border-[#282828] hover:border-[#484848] rounded-xl flex items-center justify-center overflow-hidden">
         <Image
           src={imageUrl || "/icon.svg"}
-          alt="image"
-          width={10}
-          height={10}
-          className="size-10 bg-[#282828]"
+          alt="Player Image"
+          width={40}
+          height={40}
+          layout="fixed"
+          className="bg-[#282828] size-full object-contain"
         />
         <button className="absolute size-4 rounded-full bg-[#282828] flex items-center justify-center border border-gray-400 group-hover:bg-[#484848] transition-all opacity-0 group-hover:opacity-100">
           <TbPhotoUp
@@ -43,12 +49,10 @@ const PlayerCard = ({
       </div>
       <input
         className="bg-transparent outline-none w-full"
-        placeholder="Player Name"
+        placeholder="Enter Player Name"
         value={username}
         onChange={handleUsernameChange}
       />
     </div>
   );
 };
-
-export default PlayerCard;

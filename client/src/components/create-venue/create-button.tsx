@@ -4,7 +4,7 @@ import { combineDateAndTime } from "@/helpers/combine-date-time";
 import { updateVenueId } from "@/state-manager/features/create-venue-form";
 import { RootState } from "@/state-manager/store";
 import { useUser } from "@clerk/nextjs";
-import React, { useState, useTransition } from "react";
+import React, { useTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 

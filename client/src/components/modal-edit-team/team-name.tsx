@@ -12,18 +12,9 @@ const TeamName = () => {
 
   const dispatch = useDispatch();
 
-  // Set team name on initial load or when activeTeamId changes
-  useEffect(() => {
-    const activeTeam = teams.find((team) => team.id === activeTeamId);
-    if (activeTeam) {
-      setTeamName(activeTeam.name);
-    }
-  }, [activeTeamId, teams]);
-
-  // Handle input value change
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newTeamName = e.target.value;
-    setTeamName(newTeamName); // Update the local state immediately for controlled input
+    setTeamName(newTeamName);
     if (activeTeamId) {
       dispatch(
         updateATeamName({ teamId: activeTeamId, teamName: newTeamName })
@@ -31,10 +22,17 @@ const TeamName = () => {
     }
   };
 
+  useEffect(() => {
+    const activeTeam = teams.find((team) => team.id === activeTeamId);
+    if (activeTeam) {
+      setTeamName(activeTeam.name);
+    }
+  }, [activeTeamId, teams]);
+
   return (
     <input
       className="text-xl font-semibold bg-transparent outline-none"
-      placeholder="Team name"
+      placeholder="Enter Team Name"
       value={teamName}
       onChange={handleNameChange}
     />

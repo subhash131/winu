@@ -3,7 +3,7 @@ import ModalEditTeam from "../modal-edit-team";
 import StartDatetime from "./start-datetime";
 import EndDatetime from "./end-datetime";
 import CreateButton from "./create-button";
-import Teams from "./add-teams";
+import Teams from "./teams";
 import Description from "./description";
 import VenueImage from "./venue-image";
 import Title from "./name";

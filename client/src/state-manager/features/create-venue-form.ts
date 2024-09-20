@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { createSlice } from "@reduxjs/toolkit";
 import { TPlayer } from "@/types/player";
 
-type TeamWithPlayers = {
+export type TeamWithPlayers = {
   players: TPlayer[];
 } & Omit<TTeam, "players">;
 
@@ -26,7 +26,7 @@ type CreateVenue = Omit<
 };
 
 const initialState: CreateVenue = {
-  id: "remove",
+  id: "q",
   modalActive: false,
   startDate: new Date().toISOString(),
   startTime: getTime("START_TIME"),
@@ -36,9 +36,16 @@ const initialState: CreateVenue = {
   name: "",
   description: "",
   teams: [
-    { name: "Team 1", id: "1", players: [{ username: "", id: "1" }] },
-    { name: "Team 2", id: "2", players: [{ username: "", id: "2" }] },
-    { name: "Team 3", id: "3", players: [{ username: "", id: "3" }] },
+    {
+      name: "Team 1",
+      id: uuidv4(),
+      players: [
+        { username: "", id: uuidv4() },
+        { username: "", id: uuidv4() },
+      ],
+    },
+    { name: "Team 2", id: uuidv4(), players: [{ username: "", id: uuidv4() }] },
+    { name: "Team 3", id: uuidv4(), players: [{ username: "", id: uuidv4() }] },
   ],
 };
 
@@ -88,7 +95,7 @@ const createVenue = createSlice({
         {
           id: uuidv4(),
           name: `Team ${state.teams.length + 1}`,
-          players: [{ username: "" }],
+          players: [{ username: "", id: uuidv4() }],
         },
       ];
     }),
@@ -101,28 +108,49 @@ const createVenue = createSlice({
         );
       }
     ),
+    updateATeamImage: create.reducer<{ imageUrl: string }>((state, action) => {
+      state.teams = state.teams.map((team) =>
+        team.id === state.activeTeamId
+          ? { ...team, imageUrl: action.payload.imageUrl }
+          : team
+      );
+    }),
     updateATeamPlayer: create.reducer<{
       teamId: string;
-      teamName: string;
       playerId: string;
       playerName: string;
     }>((state, action) => {
-      const newTeam = state.teams.map((team) => {
+      state.teams = state.teams.map((team) => {
         if (team.id === action.payload.teamId) {
-          team.players.map((player) => {
-            if (player.id === action.payload.playerId) {
-              return { ...player, username: action.payload.playerName };
-            } else return player;
-          });
-          return { ...team, name: action.payload.teamName };
-        } else return team;
+          // Create a new players array with the updated player name
+          const updatedPlayers = team.players.map((player) =>
+            player.id === action.payload.playerId
+              ? { ...player, username: action.payload.playerName }
+              : player
+          );
+          // Return the updated team with the new players array
+          return { ...team, players: updatedPlayers };
+        }
+        return team; // Return the team unchanged if it doesn't match
       });
-      state.teams = newTeam;
+    }),
+    addNewTeamPlayer: create.reducer<{ teamId: string }>((state, action) => {
+      state.teams = state.teams.map((team) => {
+        if (team.id === action.payload.teamId) {
+          return {
+            ...team,
+            players: [...team.players, { id: uuidv4(), username: "" }],
+          };
+        }
+        return team; // Return the team unchanged if it doesn't match
+      });
     }),
   }),
 });
 
 export const {
+  updateATeamImage,
+  addNewTeamPlayer,
   updateActiveTeamId,
   updateATeamName,
   updateATeamPlayer,

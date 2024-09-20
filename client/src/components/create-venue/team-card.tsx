@@ -26,16 +26,10 @@ const TeamCard = ({
   id: string;
   venueId: string;
 }) => {
-  const { name: TeamFormName } = useSelector(
-    (state: RootState) => state.TeamForm
-  );
   const dispatch = useDispatch();
   const handleToggleModal = () => {
-    console.log("🚀 ~ TeamFormName:", TeamFormName);
-    console.log("name ::", name);
     dispatch(toggleModalActive());
     dispatch(updateActiveTeamId(id));
-    console.log("🚀 ~ TeamFormName:", TeamFormName);
   };
 
   return (

@@ -6,7 +6,7 @@ import { useState, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import { useFileStore } from "@/providers/file-storage-provider";
-import { updateTeamImageUrl } from "@/state-manager/features/team-form";
+import { updateATeamImage } from "@/state-manager/features/create-venue-form";
 
 const TeamImage = () => {
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -27,7 +27,7 @@ const TeamImage = () => {
         setUploadProgress(p);
       },
     });
-    dispatch(updateTeamImageUrl(res.url));
+    dispatch(updateATeamImage({ imageUrl: res.url }));
     setImage(res.url);
   };
   return (
