@@ -1,21 +1,41 @@
 "use client";
-import { updateTeamName } from "@/state-manager/features/team-form";
+import { updateATeamName } from "@/state-manager/features/create-venue-form";
 import { RootState } from "@/state-manager/store";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const TeamName = () => {
-  const { name } = useSelector((state: RootState) => state.TeamForm);
-  console.log("🚀 ~ TeamName ~ name:", name);
+  const [teamName, setTeamName] = useState<string>("");
+  const { teams, activeTeamId } = useSelector(
+    (state: RootState) => state.CreateVenue
+  );
+
   const dispatch = useDispatch();
+
+  // Set team name on initial load or when activeTeamId changes
+  useEffect(() => {
+    const activeTeam = teams.find((team) => team.id === activeTeamId);
+    if (activeTeam) {
+      setTeamName(activeTeam.name);
+    }
+  }, [activeTeamId, teams]);
+
+  // Handle input value change
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateTeamName(e.target.value));
+    const newTeamName = e.target.value;
+    setTeamName(newTeamName); // Update the local state immediately for controlled input
+    if (activeTeamId) {
+      dispatch(
+        updateATeamName({ teamId: activeTeamId, teamName: newTeamName })
+      );
+    }
   };
+
   return (
     <input
       className="text-xl font-semibold bg-transparent outline-none"
       placeholder="Team name"
-      value={name}
+      value={teamName}
       onChange={handleNameChange}
     />
   );

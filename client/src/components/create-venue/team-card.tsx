@@ -1,10 +1,13 @@
 "use client";
-import { toggleModalActive } from "@/state-manager/features/create-venue-form";
+import {
+  toggleModalActive,
+  updateActiveTeamId,
+} from "@/state-manager/features/create-venue-form";
 import { Edit } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateActiveTeam } from "@/state-manager/features/team-form";
+// import { updateActiveTeam } from "@/state-manager/features/team-form";
 import { TPlayer } from "@/types/player";
 import { RootState } from "@/state-manager/store";
 
@@ -31,15 +34,7 @@ const TeamCard = ({
     console.log("🚀 ~ TeamFormName:", TeamFormName);
     console.log("name ::", name);
     dispatch(toggleModalActive());
-    dispatch(
-      updateActiveTeam({
-        activeTeamId: id,
-        imageUrl: imageUrl || "/icon.svg",
-        name,
-        players,
-        venueId,
-      })
-    );
+    dispatch(updateActiveTeamId(id));
     console.log("🚀 ~ TeamFormName:", TeamFormName);
   };
 

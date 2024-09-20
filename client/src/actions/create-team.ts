@@ -1,13 +1,28 @@
 "use server";
 
-import { TTeam } from "@/types/team";
+import { Team } from "@/state-manager/features/team-form";
 
-export async function createVenue({ description, imageUrl, name }: TTeam) {
+export async function createVenue({
+  imageUrl,
+  name,
+  players,
+  activeTeamId,
+  venueId,
+}: Team) {
   const body = {
-    description,
     imageUrl,
     name,
   };
+  if (players?.length > 0) {
+    try {
+      const res = await fetch("http://localhost:3000/api/bulk/player", {
+        method: "POST",
+        body: JSON.stringify(players),
+        cache: "no-store",
+      });
+    } catch (err) {}
+  }
+
   try {
     const res = await fetch("http://localhost:3000/api/team", {
       method: "POST",

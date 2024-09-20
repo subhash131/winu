@@ -1,7 +1,7 @@
 import { TPlayer } from "@/types/player";
 import { createSlice } from "@reduxjs/toolkit";
 
-type Team = {
+export type Team = {
   activeTeamId?: string;
   venueId?: string;
   imageUrl?: string;

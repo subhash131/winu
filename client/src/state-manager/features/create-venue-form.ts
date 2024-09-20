@@ -15,6 +15,7 @@ type CreateVenue = Omit<
   "startDate" | "endDate" | "createdBy" | "teams"
 > & {
   modalActive: boolean;
+  activeTeamId?: string;
   startDate: string;
   startTime: string;
   endDate: string;
@@ -35,9 +36,9 @@ const initialState: CreateVenue = {
   name: "",
   description: "",
   teams: [
-    { name: "Team 1", id: "1", players: [{ username: "" }] },
-    { name: "Team 2", id: "2", players: [{ username: "" }] },
-    { name: "Team 3", id: "3", players: [{ username: "" }] },
+    { name: "Team 1", id: "1", players: [{ username: "", id: "1" }] },
+    { name: "Team 2", id: "2", players: [{ username: "", id: "2" }] },
+    { name: "Team 3", id: "3", players: [{ username: "", id: "3" }] },
   ],
 };
 
@@ -47,6 +48,9 @@ const createVenue = createSlice({
   reducers: (create) => ({
     toggleModalActive: create.reducer((state) => {
       state.modalActive = !state.modalActive;
+    }),
+    updateActiveTeamId: create.reducer<string>((state, action) => {
+      state.activeTeamId = action.payload;
     }),
     updateStartDate: create.reducer<string>((state, action) => {
       state.startDate = action.payload;
@@ -88,10 +92,40 @@ const createVenue = createSlice({
         },
       ];
     }),
+    updateATeamName: create.reducer<{ teamId: string; teamName: string }>(
+      (state, action) => {
+        state.teams = state.teams.map((team) =>
+          team.id === action.payload.teamId
+            ? { ...team, name: action.payload.teamName }
+            : team
+        );
+      }
+    ),
+    updateATeamPlayer: create.reducer<{
+      teamId: string;
+      teamName: string;
+      playerId: string;
+      playerName: string;
+    }>((state, action) => {
+      const newTeam = state.teams.map((team) => {
+        if (team.id === action.payload.teamId) {
+          team.players.map((player) => {
+            if (player.id === action.payload.playerId) {
+              return { ...player, username: action.payload.playerName };
+            } else return player;
+          });
+          return { ...team, name: action.payload.teamName };
+        } else return team;
+      });
+      state.teams = newTeam;
+    }),
   }),
 });
 
 export const {
+  updateActiveTeamId,
+  updateATeamName,
+  updateATeamPlayer,
   addNewTeam,
   toggleModalActive,
   updateStartDate,
