@@ -115,7 +115,7 @@ const createVenue = createSlice({
           : team
       );
     }),
-    updateATeamPlayer: create.reducer<{
+    updateATeamPlayerName: create.reducer<{
       teamId: string;
       playerId: string;
       playerName: string;
@@ -126,6 +126,25 @@ const createVenue = createSlice({
           const updatedPlayers = team.players.map((player) =>
             player.id === action.payload.playerId
               ? { ...player, username: action.payload.playerName }
+              : player
+          );
+          // Return the updated team with the new players array
+          return { ...team, players: updatedPlayers };
+        }
+        return team; // Return the team unchanged if it doesn't match
+      });
+    }),
+    updateATeamPlayerImage: create.reducer<{
+      teamId: string;
+      playerId: string;
+      playerImage: string;
+    }>((state, action) => {
+      state.teams = state.teams.map((team) => {
+        if (team.id === action.payload.teamId) {
+          // Create a new players array with the updated player name
+          const updatedPlayers = team.players.map((player) =>
+            player.id === action.payload.playerId
+              ? { ...player, imageUrl: action.payload.playerImage }
               : player
           );
           // Return the updated team with the new players array
@@ -149,11 +168,12 @@ const createVenue = createSlice({
 });
 
 export const {
+  updateATeamPlayerImage,
   updateATeamImage,
   addNewTeamPlayer,
   updateActiveTeamId,
   updateATeamName,
-  updateATeamPlayer,
+  updateATeamPlayerName,
   addNewTeam,
   toggleModalActive,
   updateStartDate,

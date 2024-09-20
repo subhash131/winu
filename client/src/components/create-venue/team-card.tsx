@@ -6,10 +6,8 @@ import {
 import { Edit } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { updateActiveTeam } from "@/state-manager/features/team-form";
+import { useDispatch } from "react-redux";
 import { TPlayer } from "@/types/player";
-import { RootState } from "@/state-manager/store";
 
 const TeamCard = ({
   name,
@@ -50,18 +48,39 @@ const TeamCard = ({
       <div className="size-full flex flex-col items-start justify-center">
         <p>{name}</p>
         <div className="flex">
-          {players?.map(({ imageUrl }, idx) => {
-            return (
-              <Image
-                src={imageUrl || "/icon.svg"}
-                alt="players"
-                className="size-4 rounded-full border border-active"
-                width={10}
-                height={10}
-                key={`team-player-img-${idx}`}
-              />
-            );
-          })}
+          {players.length <= 5 &&
+            players?.map(({ imageUrl }, idx) => {
+              return (
+                <Image
+                  src={imageUrl || "/icon.svg"}
+                  alt="players"
+                  className="size-5 rounded-full border border-active"
+                  width={10}
+                  height={10}
+                  key={`team-player-img-${idx}`}
+                />
+              );
+            })}
+          {players.length > 5 &&
+            players.slice(0, 5).map(({ imageUrl }, idx) => {
+              return (
+                <>
+                  <Image
+                    src={imageUrl || "/icon.svg"}
+                    alt="players"
+                    className="size-5 rounded-full border border-active"
+                    width={10}
+                    height={10}
+                    key={`team-player-img-${idx}`}
+                  />
+                </>
+              );
+            })}
+          {players.length > 5 && (
+            <div className="size-5 rounded-full bg-[#282828] text-[0.6rem] flex items-center justify-center">
+              +{players.length - 5}
+            </div>
+          )}
         </div>
       </div>
       <button className="size-10 flex-shrink-0 rounded-full border-inactive grid place-content-center group text-inactive group-hover:text-active hover:border-active transition-colors">

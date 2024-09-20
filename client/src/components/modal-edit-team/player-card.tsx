@@ -1,9 +1,15 @@
 "use client";
-import { updateATeamPlayer } from "@/state-manager/features/create-venue-form";
+import { useState } from "react";
+import { useFileStore } from "@/providers/file-storage-provider";
+import {
+  updateATeamPlayerImage,
+  updateATeamPlayerName,
+} from "@/state-manager/features/create-venue-form";
 import { RootState } from "@/state-manager/store";
 import Image from "next/image";
 import { TbPhotoUp } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
 
 export const PlayerCard = ({
   imageUrl,
@@ -16,14 +22,38 @@ export const PlayerCard = ({
   id: string;
   index: number;
 }) => {
+  const [uploadProgress, setUploadProgress] = useState<number>();
   const { activeTeamId } = useSelector((state: RootState) => state.CreateVenue);
   const dispatch = useDispatch();
+  const { edgestore } = useFileStore();
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
-      updateATeamPlayer({
+      updateATeamPlayerName({
         playerId: id,
         playerName: e.target.value,
+        teamId: activeTeamId!,
+      })
+    );
+  };
+
+  const uploadPlayerImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = (e.target as HTMLInputElement).files;
+    if (!files || !files[0]) {
+      toast.error("Image not found!");
+      return;
+    }
+    toast.success("uploading image..");
+    const res = await edgestore.publicFiles.upload({
+      file: files[0],
+      onProgressChange: (p: number) => {
+        setUploadProgress(p);
+      },
+    });
+    dispatch(
+      updateATeamPlayerImage({
+        playerId: id,
+        playerImage: res.url,
         teamId: activeTeamId!,
       })
     );
@@ -37,15 +67,27 @@ export const PlayerCard = ({
           alt="Player Image"
           width={40}
           height={40}
-          layout="fixed"
-          className="bg-[#282828] size-full object-contain"
+          className={`bg-[#282828] size-full ${
+            uploadProgress && uploadProgress > 0 && uploadProgress !== 100
+              ? "opacity-35"
+              : "opacity-100"
+          }`}
         />
-        <button className="absolute size-4 rounded-full bg-[#282828] flex items-center justify-center border border-gray-400 group-hover:bg-[#484848] transition-all opacity-0 group-hover:opacity-100">
-          <TbPhotoUp
-            className="rounded-md text-white transition-colors"
-            size={22}
-          />
-        </button>
+
+        <div className="absolute size-4 rounded-full bg-[#282828] flex items-center justify-center border border-gray-400 group-hover:bg-[#484848] transition-all opacity-0 group-hover:opacity-100 pointer-events-none">
+          {
+            <TbPhotoUp
+              className="rounded-md text-white transition-colors pointer-events-none"
+              size={22}
+            />
+          }
+        </div>
+        <input
+          className="size-full absolute top-0 left-0 opacity-0 cursor-pointer"
+          type="file"
+          accept="image/*"
+          onChange={uploadPlayerImage}
+        />
       </div>
       <input
         className="bg-transparent outline-none w-full"
