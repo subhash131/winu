@@ -2,7 +2,11 @@
 
 import { TPlayer } from "@/types/player";
 
-export async function createVenue({ players }: { players: TPlayer[] }) {
+export async function createMultiplePlayers({
+  players,
+}: {
+  players: TPlayer[];
+}) {
   try {
     const res = await fetch("http://localhost:3000/api/bulk/player", {
       method: "POST",
