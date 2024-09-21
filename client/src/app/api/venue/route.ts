@@ -5,6 +5,33 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   await connect();
+  const start = req.nextUrl.searchParams.get("start") || 0;
+  const limit = req.nextUrl.searchParams.get("limit") || 10;
+  const past = req.nextUrl.searchParams.get("past");
+
+  const currentTime = new Date();
+  const thirtyMinutesAgo = new Date(currentTime.getTime() - 30 * 60 * 1000);
+
+  try {
+    const res = await Venue.find(
+      past
+        ? {
+            endDate:
+              past === "true"
+                ? { $lte: thirtyMinutesAgo }
+                : { $gte: thirtyMinutesAgo },
+          }
+        : {}
+    )
+      .sort({ startDate: 1 })
+      .skip(Number(start))
+      .limit(Number(limit));
+
+    return NextResponse.json(res, { status: 200 });
+  } catch (err) {
+    console.log("🚀 ~ GET ~ err:", err);
+    return NextResponse.json({ error: err }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {
