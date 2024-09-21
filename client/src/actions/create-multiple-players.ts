@@ -2,13 +2,15 @@
 
 import { TPlayer } from "@/types/player";
 
+const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+
 export async function createMultiplePlayers({
   players,
 }: {
   players: TPlayer[];
 }) {
   try {
-    const res = await fetch("http://localhost:3000/api/bulk/player", {
+    const res = await fetch(`${baseUrl}/api/bulk/player`, {
       method: "POST",
       body: JSON.stringify(players),
       cache: "no-store",

@@ -1,8 +1,10 @@
 "use server";
 
+const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+
 export const getPastVenues = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/venue?past=true", {
+    const res = await fetch(`${baseUrl}/api/venue?past=true`, {
       method: "GET",
       next: {
         revalidate: 60,
