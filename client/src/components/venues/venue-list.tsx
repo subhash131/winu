@@ -14,13 +14,12 @@ const VenueList = () => {
     switch (type) {
       case "UPCOMING":
         res = await getActiveVenues();
-        setVenues(res);
         break;
       case "PAST":
         res = await getPastVenues();
-        setVenues(res);
         break;
     }
+    if (res) setVenues(res);
   };
   useEffect(() => {
     getVenues();
