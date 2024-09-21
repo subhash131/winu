@@ -28,7 +28,6 @@ export async function createVenue({
       body: JSON.stringify(body),
       cache: "no-store",
     });
-    console.log("🚀 ~ res:", res);
     const newVenue = await res.json();
     return newVenue;
   } catch (err) {

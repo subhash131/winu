@@ -20,6 +20,7 @@ const VenueList = () => {
         break;
     }
     if (res) setVenues(res);
+    console.log("🚀 ~ getVenues ~ res:", res);
   };
   useEffect(() => {
     getVenues();
@@ -27,7 +28,7 @@ const VenueList = () => {
   return (
     <div className="h-full w-full overflow-scroll pb-32">
       {venues.map(({ id, name }) => {
-        return <VenueCard name={name} key={id} />;
+        return <VenueCard name={name} key={id} />;  
       })}
     </div>
   );

@@ -1,10 +1,10 @@
 "use server";
-const baseUrl = process.env.BASE_URL || "http://localhost:3000";
-console.log("🚀 ~ baseUrl:", baseUrl);
 
-export const getActiveVenues = async () => {
+const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+
+export const getTeams = async () => {
   try {
-    const res = await fetch(`${baseUrl}/api/venue?past=false`, {
+    const res = await fetch(`${baseUrl}/api/teams`, {
       method: "GET",
       cache: "no-store",
     });

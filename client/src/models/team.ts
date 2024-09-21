@@ -1,5 +1,4 @@
 import mongoose, { Document, Schema } from "mongoose";
-import Player from "./player";
 import { TTeam } from "@/types/team";
 
 export interface ITeam extends Document, Omit<TTeam, "id"> {}
@@ -12,7 +11,7 @@ const Team: Schema<ITeam> = new Schema(
     },
     imageUrl: { type: String },
     description: { type: String },
-    players: [{ type: mongoose.Schema.Types.ObjectId, ref: Player }],
+    players: [{ type: mongoose.Schema.Types.ObjectId, ref: "Player" }],
   },
   { timestamps: true }
 );

@@ -6,11 +6,8 @@ export const getPastVenues = async () => {
   try {
     const res = await fetch(`${baseUrl}/api/venue?past=true`, {
       method: "GET",
-      next: {
-        revalidate: 60,
-      },
+      cache: "no-store",
     });
-    console.log("🚀 ~ res:", res);
     const venues = await res.json();
     return venues;
   } catch (err) {

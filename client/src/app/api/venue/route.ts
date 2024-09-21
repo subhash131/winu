@@ -2,8 +2,12 @@
 import { connect } from "@/db/index";
 import Venue from "@/models/venue";
 import { NextRequest, NextResponse } from "next/server";
+import Team from "@/models/team";
+import Player from "@/models/player";
 
 export async function GET(req: NextRequest) {
+  Team;
+  Player;
   await connect();
   const start = req.nextUrl.searchParams.get("start") || 0;
   const limit = req.nextUrl.searchParams.get("limit") || 10;
@@ -25,8 +29,14 @@ export async function GET(req: NextRequest) {
     )
       .sort({ startDate: 1 })
       .skip(Number(start))
-      .limit(Number(limit));
-
+      .limit(Number(limit))
+      .populate({
+        path: "teams",
+        populate: {
+          path: "players",
+        },
+      })
+      .exec();
     return NextResponse.json(res, { status: 200 });
   } catch (err) {
     console.log("🚀 ~ GET ~ err:", err);
