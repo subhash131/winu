@@ -1,5 +1,6 @@
 "use server";
 const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+console.log("🚀 ~ baseUrl:", baseUrl);
 
 export const getActiveVenues = async () => {
   try {
