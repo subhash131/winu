@@ -10,7 +10,6 @@ const VenueList = () => {
   const [venues, setVenues] = useState([]);
   const { type } = useSelector((state: RootState) => state.SwitchVenue);
   const getVenues = async () => {
-    console.log("🚀 ~ VenueList ~ type:", type);
     let res;
     switch (type) {
       case "UPCOMING":
@@ -21,7 +20,6 @@ const VenueList = () => {
         break;
     }
     if (res) setVenues(res);
-    console.log("venues ::", res);
   };
   useEffect(() => {
     getVenues();
