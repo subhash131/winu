@@ -19,12 +19,7 @@ export async function createTeam({
   venueId,
 }: Team) {
   const playersId: any = [];
-
-  const body = {
-    imageUrl,
-    name,
-    players: playersId,
-  };
+  const teams: any = [];
 
   if (players?.length > 0) {
     try {
@@ -34,20 +29,47 @@ export async function createTeam({
           playersId.push(player._id);
         });
       }
-      console.log("🚀 ~ res:", res);
     } catch (err) {
       console.log("🚀 ~ err:", err);
     }
   }
 
+  console.log("pppp::", playersId);
+
+  const body = {
+    imageUrl,
+    name,
+    players: playersId,
+  };
+
   try {
-    const res = await fetch("http://localhost:3000/api/team", {
+    // create team
+    const postRes = await fetch("http://localhost:3000/api/team", {
       method: "POST",
       body: JSON.stringify(body),
       cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-    const newTeam = await res.json();
-    return newTeam;
+    const newTeam = await postRes.json();
+    console.log("🚀 ~ newTeam:", newTeam._id);
+
+    //push team to venue
+    const patchRes = await fetch("http://localhost:3000/api/venue", {
+      method: "PATCH",
+      body: JSON.stringify({
+        venueId,
+        teams: [newTeam._id],
+      }),
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (patchRes) {
+      return newTeam;
+    }
   } catch (err) {
     console.log("Failed to create venue", err);
   }

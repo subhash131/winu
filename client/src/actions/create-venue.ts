@@ -12,7 +12,7 @@ export async function createVenue({
   streamLink,
 }: TVenue) {
   const body = {
-    createdBy: "fix soon",
+    createdBy,
     description,
     endDate,
     startDate,
@@ -21,7 +21,6 @@ export async function createVenue({
     streamLink,
   };
   try {
-    console.log("createdBy", createdBy);
     const res = await fetch("http://localhost:3000/api/venue", {
       method: "POST",
       body: JSON.stringify(body),

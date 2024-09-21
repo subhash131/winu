@@ -5,7 +5,7 @@ import { TPlayer } from "@/types/player";
 export async function createVenue({
   description,
   imageUrl,
-  username = "unknown",
+  username,
 }: TPlayer) {
   const body = {
     description,

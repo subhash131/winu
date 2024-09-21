@@ -14,6 +14,7 @@ export async function createMultiplePlayers({
       cache: "no-store",
     });
     const newPlayers = await res.json();
+    console.log("🚀 ~ newPlayers :::::", newPlayers);
     return newPlayers;
   } catch (err) {
     console.log("Failed to create venue", err);

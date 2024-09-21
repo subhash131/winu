@@ -26,7 +26,7 @@ export type CreateVenue = Omit<
 };
 
 const initialState: CreateVenue = {
-  id: "q",
+  id: "",
   modalActive: false,
   startDate: new Date().toISOString(),
   startTime: getTime("START_TIME"),
@@ -54,6 +54,7 @@ const createVenue = createSlice({
   initialState,
   reducers: (create) => ({
     toggleModalActive: create.reducer((state) => {
+      console.log(state.activeTeamId);
       state.modalActive = !state.modalActive;
     }),
     updateActiveTeamId: create.reducer<string>((state, action) => {
@@ -104,6 +105,15 @@ const createVenue = createSlice({
         state.teams = state.teams.map((team) =>
           team.id === action.payload.teamId
             ? { ...team, name: action.payload.teamName }
+            : team
+        );
+      }
+    ),
+    updateATeamId: create.reducer<{ teamId: string; newTeamId: string }>(
+      (state, action) => {
+        state.teams = state.teams.map((team) =>
+          team.id === action.payload.teamId
+            ? { ...team, id: action.payload.newTeamId }
             : team
         );
       }
@@ -168,6 +178,7 @@ const createVenue = createSlice({
 });
 
 export const {
+  updateATeamId,
   updateATeamPlayerImage,
   updateATeamImage,
   addNewTeamPlayer,

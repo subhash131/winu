@@ -4,6 +4,7 @@ import { combineDateAndTime } from "@/helpers/combine-date-time";
 import { updateVenueId } from "@/state-manager/features/create-venue-form";
 import { RootState } from "@/state-manager/store";
 import { useUser } from "@clerk/nextjs";
+import { useWallet } from "@solana/wallet-adapter-react";
 import React, { useTransition } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
@@ -23,6 +24,7 @@ const CreateButton = () => {
   const dispatch = useDispatch();
   const { user } = useUser();
   const [loading, startTransition] = useTransition();
+  const wallet = useWallet();
 
   const parsedStartDate = combineDateAndTime(
     startDate,
@@ -31,7 +33,11 @@ const CreateButton = () => {
   const parsedEndDate = combineDateAndTime(endDate, endTime).toISOString();
 
   const create = async () => {
-    const userId = user?.id || "123xyz";
+    const userId = wallet.publicKey?.toString();
+    if (!userId) {
+      toast.error("Please Connect your wallet");
+      return;
+    }
 
     try {
       startTransition(async () => {
