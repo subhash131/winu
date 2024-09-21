@@ -27,9 +27,31 @@ const VenueList = () => {
   }, [type]);
   return (
     <div className="h-full w-full overflow-scroll pb-32">
-      {venues.map(({ id, name }) => {
-        return <VenueCard name={name} key={id} />;  
-      })}
+      {venues.map(
+        ({
+          _id,
+          name,
+          startDate,
+          endDate,
+          imageUrl,
+          streamLink,
+          description,
+          teams,
+        }) => {
+          return (
+            <VenueCard
+              name={name}
+              key={_id}
+              startDate={startDate}
+              endDate={endDate}
+              imageUrl={imageUrl}
+              streamLink={streamLink}
+              description={description}
+              teams={teams}
+            />
+          );
+        }
+      )}
     </div>
   );
 };
