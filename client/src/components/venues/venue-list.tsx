@@ -14,12 +14,10 @@ const VenueList = () => {
     switch (type) {
       case "UPCOMING":
         res = await getActiveVenues();
-        console.log("🚀 ~ getVenues ~ res:", res);
         setVenues(res);
         break;
       case "PAST":
         res = await getPastVenues();
-        console.log("🚀 ~ getVenues ~ res:", res);
         setVenues(res);
         break;
     }
