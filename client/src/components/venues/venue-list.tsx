@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/state-manager/store";
 import { getActiveVenues } from "@/actions/get-active-venues";
 import { getPastVenues } from "@/actions/get-past-venues";
+import Link from "next/link";
 
 const VenueList = () => {
   const [venues, setVenues] = useState([]);
@@ -39,16 +40,18 @@ const VenueList = () => {
           teams,
         }) => {
           return (
-            <VenueCard
-              name={name}
-              key={_id}
-              startDate={startDate}
-              endDate={endDate}
-              imageUrl={imageUrl}
-              streamLink={streamLink}
-              description={description}
-              teams={teams}
-            />
+            <Link href={`/home?venue=${_id}`}>
+              <VenueCard
+                name={name}
+                key={_id}
+                startDate={startDate}
+                endDate={endDate}
+                imageUrl={imageUrl}
+                streamLink={streamLink}
+                description={description}
+                teams={teams}
+              />
+            </Link>
           );
         }
       )}

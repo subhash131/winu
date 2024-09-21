@@ -10,7 +10,7 @@ const VenueCard = ({
   endDate,
   imageUrl,
   streamLink,
-  // description,
+  description,
   teams,
 }: {
   name: string;
@@ -21,8 +21,6 @@ const VenueCard = ({
   description: string;
   teams: Team[];
 }) => {
-  const description =
-    "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cum porro commodi vitae, fugiat eligendi illum consectetur quos distinctio delectus veniam aliquam. Doloribus, commodi quia! Est, illo vitae in adipisci suscipit quidem autem asperiores nesciunt eum quasi! In earum nam rerum fugit beatae error eius? Provident amet error animi porro, earum qui? Inventore mollitia tenetur dolores, sit facilis laudantium, doloribus magnam, consequatur vero qui cumque quis excepturi corrupti consequuntur ad maiores quo modi. Quod nesciunt corrupti dicta delectus aut quaerat culpa officiis eius atque rerum, quo facere! Unde, architecto mollitia molestiae quod pariatur ipsa ex labore expedita quo nemo eaque quos.";
   return (
     <div className="w-full h-52 flex">
       <div className="w-36 h-full">
