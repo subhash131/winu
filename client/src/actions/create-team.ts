@@ -3,6 +3,8 @@
 import { TPlayer } from "@/types/player";
 import { createMultiplePlayers } from "./create-multiple-players";
 
+const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+
 type Team = {
   activeTeamId?: string;
   venueId?: string;
@@ -42,7 +44,7 @@ export async function createTeam({
 
   try {
     // create team
-    const postRes = await fetch("http://localhost:3000/api/team", {
+    const postRes = await fetch(`${baseUrl}/api/team`, {
       method: "POST",
       body: JSON.stringify(body),
       cache: "no-store",
@@ -53,7 +55,7 @@ export async function createTeam({
     const newTeam = await postRes.json();
 
     //push team to venue
-    const patchRes = await fetch("http://localhost:3000/api/venue", {
+    const patchRes = await fetch(`${baseUrl}/api/venue`, {
       method: "PATCH",
       body: JSON.stringify({
         venueId,

@@ -2,6 +2,8 @@
 
 import { TVenue } from "@/types/venue";
 
+const baseUrl = process.env.BASE_URL || "http://localhost:3000";
+
 export async function createVenue({
   createdBy,
   description,
@@ -21,7 +23,7 @@ export async function createVenue({
     streamLink,
   };
   try {
-    const res = await fetch("http://localhost:3000/api/venue", {
+    const res = await fetch(`${baseUrl}/api/venue`, {
       method: "POST",
       body: JSON.stringify(body),
       cache: "no-store",
