@@ -7,7 +7,6 @@ export async function POST(req: NextRequest) {
   await connect();
   try {
     const reqBody = await req.json();
-    console.log("🚀 ~ POST ~ reqBody:", reqBody);
 
     const res = await Player.insertMany(reqBody);
 

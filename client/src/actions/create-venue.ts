@@ -28,7 +28,6 @@ export async function createVenue({
     });
     console.log("🚀 ~ res:", res);
     const newVenue = await res.json();
-    console.log("🚀 ~ newVenue:", newVenue);
     return newVenue;
   } catch (err) {
     console.log("Failed to create venue", err);

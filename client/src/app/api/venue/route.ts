@@ -3,11 +3,14 @@ import { connect } from "@/db/index";
 import Venue from "@/models/venue";
 import { NextRequest, NextResponse } from "next/server";
 
+export async function GET(req: NextRequest) {
+  await connect();
+}
+
 export async function POST(req: NextRequest) {
   await connect();
   try {
     const reqBody = await req.json();
-    console.log("🚀 ~ POST ~ reqBody:", reqBody);
     const {
       name,
       startDate,

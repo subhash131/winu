@@ -54,7 +54,6 @@ const createVenue = createSlice({
   initialState,
   reducers: (create) => ({
     toggleModalActive: create.reducer((state) => {
-      console.log(state.activeTeamId);
       state.modalActive = !state.modalActive;
     }),
     updateActiveTeamId: create.reducer<string>((state, action) => {

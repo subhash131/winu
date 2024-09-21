@@ -34,8 +34,6 @@ export async function createTeam({
     }
   }
 
-  console.log("pppp::", playersId);
-
   const body = {
     imageUrl,
     name,
@@ -53,7 +51,6 @@ export async function createTeam({
       },
     });
     const newTeam = await postRes.json();
-    console.log("🚀 ~ newTeam:", newTeam._id);
 
     //push team to venue
     const patchRes = await fetch("http://localhost:3000/api/venue", {
