@@ -6,7 +6,6 @@ export const getVenueById = async (id: string) => {
   try {
     const res = await fetch(`${baseUrl}/api/venue/${id}`, {
       method: "GET",
-      cache: "no-store",
     });
     const venues = await res.json();
     return venues;

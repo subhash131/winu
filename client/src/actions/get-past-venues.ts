@@ -6,7 +6,6 @@ export const getPastVenues = async () => {
   try {
     const res = await fetch(`${baseUrl}/api/venue?past=true`, {
       method: "GET",
-      cache: "no-store",
     });
     const venues = await res.json();
     return venues;
