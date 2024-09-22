@@ -22,7 +22,7 @@ const BidModal = () => {
   }, [venueId]);
   return (
     <div
-      className={`fixed size-full top-0 backdrop-blur-md left-0 z-[100] transition-all flex items-center justify-center ${
+      className={`fixed size-full backdrop-blur-md left-0 z-[100] transition-all flex items-center justify-center ${
         searchParams.get("venue") ? "top-0" : "-top-[100vh]"
       }`}
       onClick={() => addUrlParams({ param: "venue", value: "" })}
