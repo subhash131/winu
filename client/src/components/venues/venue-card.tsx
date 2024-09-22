@@ -1,3 +1,4 @@
+import { addUrlParams } from "@/helpers/add-url-prarams";
 import { convertISOToTime } from "@/helpers/convert-iso-time";
 import { TeamWithPlayers } from "@/state-manager/features/create-venue-form";
 import Image from "next/image";
@@ -11,9 +12,11 @@ const VenueCard = ({
   imageUrl,
   streamLink,
   description,
+  id,
   teams,
 }: {
   name: string;
+  id: string;
   startDate: string;
   endDate: string;
   imageUrl: string;
@@ -22,7 +25,10 @@ const VenueCard = ({
   teams: Team[];
 }) => {
   return (
-    <div className="w-full h-52 flex">
+    <div
+      className="w-full h-52 flex"
+      onClick={() => addUrlParams({ param: "venue", value: id })}
+    >
       <div className="w-36 h-full">
         <h6 className="font-semibold text-base">Today</h6>
         <p className="font-medium text-[#8e8e8e]">Tuesday</p>

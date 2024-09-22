@@ -40,18 +40,17 @@ const VenueList = () => {
           teams,
         }) => {
           return (
-            <Link href={`/home?venue=${_id}`}>
-              <VenueCard
-                name={name}
-                key={_id}
-                startDate={startDate}
-                endDate={endDate}
-                imageUrl={imageUrl}
-                streamLink={streamLink}
-                description={description}
-                teams={teams}
-              />
-            </Link>
+            <VenueCard
+              name={name}
+              key={_id}
+              startDate={startDate}
+              endDate={endDate}
+              imageUrl={imageUrl}
+              streamLink={streamLink}
+              description={description}
+              teams={teams}
+              id={_id}
+            />
           );
         }
       )}
