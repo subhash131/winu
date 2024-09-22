@@ -12,7 +12,7 @@ export async function GET(
   team;
   player;
 
-  const { id } = params; // Get the dynamic `id` from the URL
+  const { id } = params;
 
   if (!id) {
     return NextResponse.json({ error: "ID not provided" }, { status: 400 });

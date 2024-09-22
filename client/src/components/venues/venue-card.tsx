@@ -30,20 +30,28 @@ const VenueCard = ({
       onClick={() => addUrlParams({ param: "venue", value: id })}
     >
       <div className="w-36 h-full">
-        <h6 className="font-semibold text-base">Today</h6>
-        <p className="font-medium text-[#8e8e8e]">Tuesday</p>
+        <h6 className="font-semibold text-base">
+          {new Date(startDate).getUTCDate()}{" "}
+          {new Date(startDate).toLocaleString("en-us", { month: "short" })}
+        </h6>
+        <p className="font-medium text-[#8e8e8e]">
+          {new Date(startDate).toLocaleString("en-us", { weekday: "long" })}
+        </p>
       </div>
+
       <div className="w-2 h-full relative items-center flex flex-col">
         <div className="size-3 absolute top-0 rounded-full bg-[#606062]" />
         <div className="h-full w-0.5 border-r-2 border-dashed border-[#606062]"></div>
       </div>
       <div className="size-full px-16 py-2">
-        <div className="size-full border rounded-xl border-[#484848] bg-[#282828] cursor-pointer hover:border-[#686868] transition-colors max-w-[85%] px-4 py-2 flex justify-between gap-4">
+        <div className="size-full border rounded-xl border-[#484848] bg-[#282828] cursor-pointer hover:border-[#686868] transition-colors max-w-[85%] px-4 pt-2 pb-1 flex justify-between gap-4 group ">
           <div className="flex flex-col gap-2">
             <div className="w-full h-10 flex items-center justify-start gap-2 font-normal tracking-wider">
-              <div className="size-3 rounded-full bg-orange-400 animate-pulse" />
+              <div className="size-3 rounded-full bg-orange-400 animate-pulse flex-shrink-0" />
               <p className="text-orange-400">LIVE</p>
-              <p className="text-yellow-400">{convertISOToTime(startDate)}</p>
+              <p className="text-yellow-400 ml-10 flex-shrink-0">
+                CLOSES ON {convertISOToTime(startDate)}
+              </p>
             </div>
             <div className="flex flex-col gap-1">
               <p className="text-xl">
@@ -75,6 +83,9 @@ const VenueCard = ({
                     );
                 })}
               </div>
+              <p className="text-green-500 mt-1 flex-shrink-0">
+                PRIZES UPTO 10,000 SOL
+              </p>
             </div>
           </div>
           <div className="size-36 rounded-lg mt-2 bg-black overflow-hidden flex-shrink-0">
