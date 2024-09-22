@@ -1,15 +1,14 @@
 "use client";
-import { updateVenueType } from "@/state-manager/features/switch-venues";
-import { RootState } from "@/state-manager/store";
+import { addUrlParams } from "@/helpers/add-url-params";
+import { useSearchParams } from "next/navigation";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 const SwitchVenue = () => {
-  const { type } = useSelector((state: RootState) => state.SwitchVenue);
-  const dispatch = useDispatch();
-
-  const updateSwitch = (type: "UPCOMING" | "PAST") => {
-    dispatch(updateVenueType(type));
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type");
+  const updateSwitch = () => {
+    if (type === "UPCOMING") addUrlParams({ param: "type", value: "PAST" });
+    else addUrlParams({ param: "type", value: "UPCOMING" });
   };
 
   return (
@@ -19,20 +18,10 @@ const SwitchVenue = () => {
           type == "PAST" ? "right-0" : "right-24"
         }`}
       />
-      <button
-        className="w-24 h-full text-center"
-        onClick={() => {
-          updateSwitch("UPCOMING");
-        }}
-      >
+      <button className="w-24 h-full text-center" onClick={updateSwitch}>
         Upcoming
       </button>
-      <button
-        className="w-24 h-full text-center"
-        onClick={() => {
-          updateSwitch("PAST");
-        }}
-      >
+      <button className="w-24 h-full text-center" onClick={updateSwitch}>
         Past
       </button>
     </div>

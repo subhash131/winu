@@ -1,9 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import SwitchVenue from "./features/switch-venues";
 import CreateVenue from "./features/create-venue-form";
 import Venues from "./features/venues";
 
-const reducer = combineReducers({ SwitchVenue, CreateVenue, Venues });
+const reducer = combineReducers({ CreateVenue, Venues });
 
 export const store = configureStore({
   reducer,

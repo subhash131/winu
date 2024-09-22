@@ -23,6 +23,7 @@ export type CreateVenue = Omit<
   id?: string;
   imageUrl?: string;
   teams: TeamWithPlayers[];
+  createdBy?: string;
 };
 
 const initialState: CreateVenue = {

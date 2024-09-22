@@ -19,7 +19,7 @@ export const PlayerCard = ({
 }: {
   username: string;
   imageUrl: string;
-  id: string;
+  id?: string;
   index: number;
 }) => {
   const [uploadProgress, setUploadProgress] = useState<number>();
@@ -28,13 +28,14 @@ export const PlayerCard = ({
   const { edgestore } = useFileStore();
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(
-      updateATeamPlayerName({
-        playerId: id,
-        playerName: e.target.value,
-        teamId: activeTeamId!,
-      })
-    );
+    if (id)
+      dispatch(
+        updateATeamPlayerName({
+          playerId: id,
+          playerName: e.target.value,
+          teamId: activeTeamId!,
+        })
+      );
   };
 
   const uploadPlayerImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,13 +51,14 @@ export const PlayerCard = ({
         setUploadProgress(p);
       },
     });
-    dispatch(
-      updateATeamPlayerImage({
-        playerId: id,
-        playerImage: res.url,
-        teamId: activeTeamId!,
-      })
-    );
+    if (id)
+      dispatch(
+        updateATeamPlayerImage({
+          playerId: id,
+          playerImage: res.url,
+          teamId: activeTeamId!,
+        })
+      );
   };
 
   return (

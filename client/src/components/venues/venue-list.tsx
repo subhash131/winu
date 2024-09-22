@@ -6,10 +6,12 @@ import { RootState } from "@/state-manager/store";
 import { getActiveVenues } from "@/actions/get-active-venues";
 import { getPastVenues } from "@/actions/get-past-venues";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const VenueList = () => {
   const [venues, setVenues] = useState([]);
-  const { type } = useSelector((state: RootState) => state.SwitchVenue);
+  const searchParams = useSearchParams();
+  const type = searchParams.get("type");
   const getVenues = async () => {
     let res;
     switch (type) {

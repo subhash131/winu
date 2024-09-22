@@ -1,5 +1,7 @@
-import { addUrlParams } from "@/helpers/add-url-prarams";
+import { addUrlParams } from "@/helpers/add-url-params";
 import { convertISOToTime } from "@/helpers/convert-iso-time";
+import { formatEndDate } from "@/helpers/format-end-date";
+import { formatStartDate } from "@/helpers/format-start-date";
 import { TeamWithPlayers } from "@/state-manager/features/create-venue-form";
 import Image from "next/image";
 import React from "react";
@@ -25,14 +27,10 @@ const VenueCard = ({
   teams: Team[];
 }) => {
   return (
-    <div
-      className="w-full h-52 flex"
-      onClick={() => addUrlParams({ param: "venue", value: id })}
-    >
+    <div className="w-full h-52 flex">
       <div className="w-36 h-full">
         <h6 className="font-semibold text-base">
-          {new Date(startDate).getUTCDate()}{" "}
-          {new Date(startDate).toLocaleString("en-us", { month: "short" })}
+          {formatStartDate({ startDate, includeYear: false })}
         </h6>
         <p className="font-medium text-[#8e8e8e]">
           {new Date(startDate).toLocaleString("en-us", { weekday: "long" })}
@@ -44,13 +42,17 @@ const VenueCard = ({
         <div className="h-full w-0.5 border-r-2 border-dashed border-[#606062]"></div>
       </div>
       <div className="size-full px-16 py-2">
-        <div className="size-full border rounded-xl border-[#484848] bg-[#282828] cursor-pointer hover:border-[#686868] transition-colors max-w-[85%] px-4 pt-2 pb-1 flex justify-between gap-4 group ">
+        <div
+          className="size-full border rounded-xl border-[#484848] bg-[#282828] cursor-pointer hover:border-[#686868] transition-colors max-w-[85%] px-4 pt-2 pb-1 flex justify-between gap-4 group "
+          onClick={() => addUrlParams({ param: "venue", value: id })}
+        >
           <div className="flex flex-col gap-2">
             <div className="w-full h-10 flex items-center justify-start gap-2 font-normal tracking-wider">
               <div className="size-3 rounded-full bg-orange-400 animate-pulse flex-shrink-0" />
               <p className="text-orange-400">LIVE</p>
-              <p className="text-yellow-400 ml-10 flex-shrink-0">
-                CLOSES ON {convertISOToTime(startDate)}
+              <p className="text-yellow-400 ml-4 flex-shrink-0">
+                ENDS ON: {formatEndDate({ endDate, includeYear: true })}{" "}
+                {convertISOToTime(endDate)}
               </p>
             </div>
             <div className="flex flex-col gap-1">
@@ -84,7 +86,7 @@ const VenueCard = ({
                 })}
               </div>
               <p className="text-green-500 mt-1 flex-shrink-0">
-                PRIZES UPTO 10,000 SOL
+                WIN PRIZES UPTO 10,000 SOL
               </p>
             </div>
           </div>
