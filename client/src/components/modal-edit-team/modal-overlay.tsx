@@ -1,16 +1,14 @@
 "use client";
 import React from "react";
-import { toggleModalActive } from "@/state-manager/features/create-venue-form";
-import { RootState } from "@/state-manager/store";
-import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "next/navigation";
+import { addUrlParams } from "@/helpers/add-url-params";
 
 const ModalOverlay = () => {
-  const { modalActive } = useSelector((state: RootState) => state.CreateVenue);
-  const dispatch = useDispatch();
+  const modalActive = useSearchParams().get("team");
 
   const handleCloseModal = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    dispatch(toggleModalActive());
+    addUrlParams({ param: "team", value: "" });
   };
   if (!modalActive) return;
   return (

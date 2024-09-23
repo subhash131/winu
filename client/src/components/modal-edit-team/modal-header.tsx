@@ -1,15 +1,13 @@
-import { toggleModalActive } from "@/state-manager/features/create-venue-form";
+import { addUrlParams } from "@/helpers/add-url-params";
 import React from "react";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-import { useDispatch } from "react-redux";
 
 const ModalHeader = () => {
-  const dispatch = useDispatch();
-
   const handleCloseModal = () => {
-    dispatch(toggleModalActive());
+    addUrlParams({ param: "team", value: "" });
   };
+
   return (
     <div className="w-full backdrop-blur-md h-fit sticky top-0 px-6 py-2 flex items-center justify-between border-b border-inactive z-10">
       <button onClick={handleCloseModal}>

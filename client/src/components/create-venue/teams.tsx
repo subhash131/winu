@@ -4,11 +4,11 @@ import TeamCard from "./team-card";
 import { useSelector } from "react-redux";
 import { RootState } from "@/state-manager/store";
 import { AddNewTeam } from "./add-new-team";
+import { useSearchParams } from "next/navigation";
 
 const Teams = () => {
-  const { id: venueId, teams } = useSelector(
-    (state: RootState) => state.CreateVenue
-  );
+  const { teams } = useSelector((state: RootState) => state.CreateVenue);
+  const venueId = useSearchParams().get("venue");
   if (!venueId) return;
   return (
     <div className="pt-4 h-fit w-full px-36">

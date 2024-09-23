@@ -8,6 +8,7 @@ import {
   updateActiveTeamId,
   updateATeamId,
 } from "@/state-manager/features/create-venue-form";
+import { addUrlParams } from "@/helpers/add-url-params";
 
 const SaveButton = () => {
   const [loading, startTransition] = useTransition();
@@ -32,7 +33,7 @@ const SaveButton = () => {
               dispatch(
                 updateATeamId({ teamId: team.id, newTeamId: newTeam._id })
               );
-              dispatch(updateActiveTeamId(newTeam._id));
+              addUrlParams({ param: "team", value: newTeam._id });
             }
           });
         } catch (err) {

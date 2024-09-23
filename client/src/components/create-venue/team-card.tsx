@@ -1,13 +1,10 @@
 "use client";
-import {
-  toggleModalActive,
-  updateActiveTeamId,
-} from "@/state-manager/features/create-venue-form";
+
 import { Edit } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import { useDispatch } from "react-redux";
 import { TPlayer } from "@/types/player";
+import { addUrlParams } from "@/helpers/add-url-params";
 
 const TeamCard = ({
   name,
@@ -24,10 +21,8 @@ const TeamCard = ({
   id: string;
   venueId: string;
 }) => {
-  const dispatch = useDispatch();
   const handleToggleModal = () => {
-    dispatch(toggleModalActive());
-    dispatch(updateActiveTeamId(id));
+    addUrlParams({ param: "team", value: id });
   };
 
   return (

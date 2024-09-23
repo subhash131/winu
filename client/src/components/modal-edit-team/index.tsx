@@ -1,16 +1,15 @@
 "use client";
 import React from "react";
 import ModalHeader from "./modal-header";
-import { useSelector } from "react-redux";
-import { RootState } from "@/state-manager/store";
 import SaveButton from "./save-button";
 import TeamImage from "./team-image";
 import TeamName from "./team-name";
 import TeamPlayers from "./team-players";
 import ModalOverlay from "./modal-overlay";
+import { useSearchParams } from "next/navigation";
 
 const ModalEditTeam = () => {
-  const { modalActive } = useSelector((state: RootState) => state.CreateVenue);
+  const modalActive = useSearchParams().get("team");
 
   return (
     <div>
