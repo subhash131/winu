@@ -31,12 +31,14 @@ const VenueList = () => {
   }, [type]);
   return (
     <div className="h-full w-full overflow-scroll pb-32">
-      {loading && (
-        <div className="flex gap-4 text-white py-6 items-center w-full justify-center">
-          <AiOutlineLoading3Quarters className="animate-spin" />
-          loading...
-        </div>
-      )}
+      <div
+        className={`flex gap-4 overflow-hidden transition-all text-white py-6 items-center  justify-center ${
+          loading ? "h-10 w-full" : "h-0 w-0"
+        }`}
+      >
+        <AiOutlineLoading3Quarters className="animate-spin" />
+        loading...
+      </div>
       {venues.map(
         ({
           _id,
