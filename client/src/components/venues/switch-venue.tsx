@@ -6,9 +6,12 @@ import React from "react";
 const SwitchVenue = () => {
   const searchParams = useSearchParams();
   const type = searchParams.get("type");
-  const updateSwitch = () => {
-    if (type === "UPCOMING") addUrlParams({ param: "type", value: "PAST" });
-    else addUrlParams({ param: "type", value: "UPCOMING" });
+
+  const fetchPastVenues = () => {
+    addUrlParams({ param: "type", value: "PAST" });
+  };
+  const fetchUpcomingVenues = () => {
+    addUrlParams({ param: "type", value: "UPCOMING" });
   };
 
   return (
@@ -18,10 +21,10 @@ const SwitchVenue = () => {
           type == "PAST" ? "right-0" : "right-24"
         }`}
       />
-      <button className="w-24 h-full text-center" onClick={updateSwitch}>
+      <button className="w-24 h-full text-center" onClick={fetchUpcomingVenues}>
         Upcoming
       </button>
-      <button className="w-24 h-full text-center" onClick={updateSwitch}>
+      <button className="w-24 h-full text-center" onClick={fetchPastVenues}>
         Past
       </button>
     </div>
