@@ -1,0 +1,112 @@
+{
+  "version": "0.1.0",
+  "name": "winu",
+  "instructions": [
+    {
+      "name": "initMaster",
+      "accounts": [
+        { "name": "master", "isMut": true, "isSigner": false },
+        { "name": "payer", "isMut": true, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": []
+    },
+    {
+      "name": "createVenue",
+      "accounts": [
+        { "name": "venue", "isMut": true, "isSigner": false },
+        { "name": "authority", "isMut": true, "isSigner": true },
+        { "name": "master", "isMut": true, "isSigner": false },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "bidPrice", "type": "u64" }]
+    },
+    {
+      "name": "placeBid",
+      "accounts": [
+        { "name": "venue", "isMut": true, "isSigner": false },
+        { "name": "bid", "isMut": true, "isSigner": false },
+        { "name": "buyer", "isMut": true, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [{ "name": "venueId", "type": "u32" }]
+    },
+    {
+      "name": "pickWinner",
+      "accounts": [
+        { "name": "venue", "isMut": true, "isSigner": false },
+        { "name": "authority", "isMut": false, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "venueId", "type": "u32" },
+        { "name": "winner", "type": "publicKey" }
+      ]
+    },
+    {
+      "name": "claimPrize",
+      "accounts": [
+        { "name": "venue", "isMut": true, "isSigner": false },
+        { "name": "bid", "isMut": true, "isSigner": false },
+        { "name": "authority", "isMut": true, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": [
+        { "name": "venueId", "type": "u32" },
+        { "name": "bidId", "type": "u32" }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Bid",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "id", "type": "u32" },
+          { "name": "authority", "type": "publicKey" },
+          { "name": "venueId", "type": "u32" }
+        ]
+      }
+    },
+    {
+      "name": "Venue",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "id", "type": "u32" },
+          { "name": "authority", "type": "publicKey" },
+          { "name": "bidPrice", "type": "u64" },
+          { "name": "lastBidId", "type": "u32" },
+          { "name": "winner", "type": { "option": "publicKey" } },
+          { "name": "claimed", "type": "bool" }
+        ]
+      }
+    },
+    {
+      "name": "Master",
+      "type": {
+        "kind": "struct",
+        "fields": [{ "name": "lastId", "type": "u32" }]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "ActionDenied",
+      "msg": "You cannot perform this action..!"
+    },
+    {
+      "code": 6001,
+      "name": "WinnerDeclared",
+      "msg": "Winner already declared..!"
+    },
+    { "code": 6002, "name": "NoBids", "msg": "No bids found..!" },
+    {
+      "code": 6003,
+      "name": "AlreadyClaimed",
+      "msg": "Prize already claimed..!"
+    }
+  ]
+}
