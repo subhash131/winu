@@ -4,12 +4,14 @@ import { addUrlParams } from "@/helpers/add-url-params";
 import { convertISOToTime } from "@/helpers/convert-iso-time";
 import { formatEndDate } from "@/helpers/format-end-date";
 import { formatStartDate } from "@/helpers/format-start-date";
+import { useProgram } from "@/hooks/use-program";
 import { CreateVenue } from "@/state-manager/features/create-venue-form";
 import { TPlayer } from "@/types/player";
 import { CopyIcon } from "lucide-react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useTransition } from "react";
+import { FaSpinner } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { toast } from "sonner";
 
@@ -19,10 +21,14 @@ const BidModal = () => {
   const searchParams = useSearchParams();
   const venueId = searchParams.get("venue");
 
+  const [loading, startTransition] = useTransition();
+
   const fetchVenue = async () => {
     if (!venueId) return;
-    const res = await getVenueById(venueId);
-    setVenue(res);
+    startTransition(async () => {
+      const res = await getVenueById(venueId);
+      setVenue(res);
+    });
   };
 
   useEffect(() => {
@@ -41,7 +47,7 @@ const BidModal = () => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="h-fit w-full backdrop-blur-lg flex items-center justify-between border-b px-6 border-active sticky top-0 py-2">
-          <h2 className="text-2xl">{venue?.name}</h2>
+          <h2 className="text-2xl">{!loading && venue?.name}</h2>
           <button
             className="rounded-full grid place-content-center p-2 transition-colors"
             onClick={() => addUrlParams({ param: "venue", value: "" })}
@@ -49,7 +55,14 @@ const BidModal = () => {
             <IoMdClose size={24} className="text-active hover:text-white" />
           </button>
         </div>
-        {venue && (
+        {loading && (
+          <div className="size-full p-10 flex gap-2 items-center justify-center">
+            <FaSpinner className="animate-spin" />
+            loading...
+          </div>
+        )}
+
+        {!loading && venue && (
           <div className="size-full p-10 flex flex-col gap-10">
             <div className="flex gap-10">
               {venue.imageUrl && (

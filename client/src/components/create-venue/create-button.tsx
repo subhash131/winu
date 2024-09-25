@@ -28,6 +28,7 @@ const CreateButton = () => {
     startDate,
     startTime
   ).toISOString();
+  
   const parsedEndDate = combineDateAndTime(endDate, endTime).toISOString();
 
   const create = async () => {

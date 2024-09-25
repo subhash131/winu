@@ -5,6 +5,8 @@ import { getActiveVenues } from "@/actions/get-active-venues";
 import { getPastVenues } from "@/actions/get-past-venues";
 import { useSearchParams } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useProgram } from "@/hooks/use-program";
+import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 
 const VenueList = () => {
   const [venues, setVenues] = useState([]);
@@ -26,6 +28,7 @@ const VenueList = () => {
       console.log("🚀 ~ getVenues ~ res:", res);
     });
   };
+
   useEffect(() => {
     getVenues();
   }, [type]);

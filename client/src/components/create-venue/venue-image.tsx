@@ -1,17 +1,23 @@
 "use client";
 import { useFileStore } from "@/providers/file-storage-provider";
 import { updateImageUrl } from "@/state-manager/features/create-venue-form";
+import { RootState } from "@/state-manager/store";
 import Image from "next/image";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { TbPhotoUp } from "react-icons/tb";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 
 const VenueImage = () => {
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [image, setImage] = useState("/icon.svg");
+  const { imageUrl } = useSelector((state: RootState) => state.CreateVenue);
+  const [image, setImage] = useState(imageUrl || "/icon.svg");
   const { edgestore } = useFileStore();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (imageUrl) setImage(imageUrl);
+  }, [imageUrl]);
 
   const uploadImage = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = (e.target as HTMLInputElement).files;

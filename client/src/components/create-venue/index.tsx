@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import ModalEditTeam from "../modal-edit-team";
 import StartDatetime from "./start-datetime";
 import EndDatetime from "./end-datetime";
@@ -9,8 +10,26 @@ import VenueImage from "./venue-image";
 import Title from "./name";
 import StreamLink from "./stream-link";
 import { Overlay } from "./overlay";
+import { useSearchParams } from "next/navigation";
+import { getVenueById } from "@/actions/get-venue-by-id";
+import { useDispatch } from "react-redux";
+import { updateVenueForm } from "@/state-manager/features/create-venue-form";
 
 const CreateVenue = () => {
+  const venueId = useSearchParams().get("venue");
+  const dispatch = useDispatch();
+
+  const getVenue = async () => {
+    if (!venueId) return;
+    const res = await getVenueById(venueId);
+    dispatch(updateVenueForm(res));
+  };
+
+  useEffect(() => {
+    if (!venueId) return;
+    getVenue();
+  }, [venueId]);
+
   return (
     <main className="size-full min-h-screen overflow-x-hidden text-white relative pt-10 pb-28 flex flex-col gap-10 ">
       <ModalEditTeam />

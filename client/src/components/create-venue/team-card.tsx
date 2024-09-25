@@ -21,6 +21,7 @@ const TeamCard = ({
   id: string;
   venueId: string;
 }) => {
+  
   const handleToggleModal = () => {
     addUrlParams({ param: "team", value: id });
   };
