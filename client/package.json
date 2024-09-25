@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^5.5.5",
     "@edgestore/react": "^0.2.2",
     "@edgestore/server": "^0.2.2",
+    "@project-serum/anchor": "^0.26.0",
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@reduxjs/toolkit": "^2.2.7",
