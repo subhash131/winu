@@ -57,6 +57,46 @@ const createVenue = createSlice({
     toggleModalActive: create.reducer((state) => {
       state.modalActive = !state.modalActive;
     }),
+    updateVenueForm: create.reducer<Omit<CreateVenue, "id"> & { _id: string }>(
+      (state, action) => {
+        const {
+          endDate,
+          endTime,
+          modalActive,
+          name,
+          startDate,
+          startTime,
+          streamLink,
+          teams,
+          createdBy,
+          description,
+          _id,
+          imageUrl,
+        } = action.payload;
+
+        state.activeTeamId = _id;
+        state.createdBy = createdBy;
+        state.description = description;
+        state.endDate = endDate;
+        // TODO::
+        state.endTime = "11:00";
+        state.id = _id;
+        state.imageUrl = imageUrl;
+        state.modalActive = modalActive;
+        state.name = name;
+        state.startDate = startDate;
+        // TODO::
+        state.startTime = "14:00";
+        state.streamLink = streamLink;
+
+        console.log(teams);
+        const formattedTeams = teams.map((team: any) => {
+          return { ...team, id: team._id };
+        });
+        state.teams = formattedTeams;
+      }
+    ),
+
     updateActiveTeamId: create.reducer<string>((state, action) => {
       state.activeTeamId = action.payload;
     }),
@@ -132,16 +172,15 @@ const createVenue = createSlice({
     }>((state, action) => {
       state.teams = state.teams.map((team) => {
         if (team.id === action.payload.teamId) {
-          // Create a new players array with the updated player name
           const updatedPlayers = team.players.map((player) =>
             player.id === action.payload.playerId
               ? { ...player, username: action.payload.playerName }
               : player
           );
-          // Return the updated team with the new players array
+
           return { ...team, players: updatedPlayers };
         }
-        return team; // Return the team unchanged if it doesn't match
+        return team;
       });
     }),
     updateATeamPlayerImage: create.reducer<{
@@ -151,16 +190,15 @@ const createVenue = createSlice({
     }>((state, action) => {
       state.teams = state.teams.map((team) => {
         if (team.id === action.payload.teamId) {
-          // Create a new players array with the updated player name
           const updatedPlayers = team.players.map((player) =>
             player.id === action.payload.playerId
               ? { ...player, imageUrl: action.payload.playerImage }
               : player
           );
-          // Return the updated team with the new players array
+
           return { ...team, players: updatedPlayers };
         }
-        return team; // Return the team unchanged if it doesn't match
+        return team;
       });
     }),
     addNewTeamPlayer: create.reducer<{ teamId: string }>((state, action) => {
@@ -171,13 +209,14 @@ const createVenue = createSlice({
             players: [...team.players, { id: uuidv4(), username: "" }],
           };
         }
-        return team; // Return the team unchanged if it doesn't match
+        return team;
       });
     }),
   }),
 });
 
 export const {
+  updateVenueForm,
   updateATeamId,
   updateATeamPlayerImage,
   updateATeamImage,
