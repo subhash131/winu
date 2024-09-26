@@ -40,6 +40,11 @@ const VenueList = () => {
         <AiOutlineLoading3Quarters className="animate-spin" />
         loading...
       </div>
+      {venues.length <= 0 && (
+        <div className="size-full flex items-center justify-center">
+          No venues..!
+        </div>
+      )}
       {venues.map(
         ({
           _id,
