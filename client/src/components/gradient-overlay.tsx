@@ -1,10 +1,9 @@
 import React from "react";
-import styles from "./gradient.module.css";
-import { TsParticles } from "./particles";
+import { TsParticles } from "./landing-page/particles";
 
 const GradientOverlay = () => {
   return (
-    <div className="size-full bg-transparent relative">
+    <div className="h-screen w-full bg-transparent absolute top-0 left-0">
       <TsParticles />
     </div>
   );

@@ -40,7 +40,7 @@ export const TsParticles = () => {
               },
               modes: {
                 push: {
-                  quantity: 4,
+                  quantity: 0,
                 },
                 repulse: {
                   distance: 100,
@@ -50,12 +50,12 @@ export const TsParticles = () => {
             },
             particles: {
               color: {
-                value: "#333233",
+                value: "rgba(36,35,36,0.3)",
               },
               links: {
                 enable: false,
                 color: {
-                  value: "#333233",
+                  value: "rgba(36,35,36,0.3)",
                 },
               },
               move: {
@@ -67,6 +67,7 @@ export const TsParticles = () => {
                 random: false,
                 speed: 1,
                 straight: false,
+                attract: { enable: true },
               },
               number: {
                 density: {
@@ -74,10 +75,10 @@ export const TsParticles = () => {
                   height: 800,
                   width: 800,
                 },
-                value: 80,
+                value: 50,
               },
               opacity: {
-                value: 1,
+                value: 0.7,
               },
               shape: {
                 type: ["star"],
