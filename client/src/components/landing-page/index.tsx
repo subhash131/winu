@@ -13,6 +13,7 @@ const LandingPage = () => {
       <GradientOverlay />
       <div className="h-screen w-full z-10 pointer-events-none relative">
         <SpinAnimation />
+        <div className="absolute bottom-0 right-0 h-20 w-72 bg-black" />
       </div>
       <div className="h-screen w-full "></div>
     </main>
