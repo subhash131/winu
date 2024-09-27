@@ -12,6 +12,7 @@ const VenueList = () => {
   const wallet = useWallet();
   const fetchMyVenues = async () => {
     if (wallet.connecting || !wallet.connected || !wallet.publicKey) {
+      setMyVenues([]);
       return;
     }
 
@@ -30,7 +31,7 @@ const VenueList = () => {
   }, [wallet?.publicKey]);
   return (
     <div className="size-full">
-      <div className="flex items-center justify-center size-full gap-4">
+      <div className="flex items-center justify-center size-full gap-4 transition-all py-2">
         {loading && (
           <>
             <FaSpinner className="animate-spin" />
