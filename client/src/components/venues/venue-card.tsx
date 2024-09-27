@@ -1,9 +1,12 @@
+"use client";
 import { addUrlParams } from "@/helpers/add-url-params";
 import { convertISOToTime } from "@/helpers/convert-iso-time";
 import { formatEndDate } from "@/helpers/format-end-date";
 import { formatStartDate } from "@/helpers/format-start-date";
 import { TeamWithPlayers } from "@/state-manager/features/create-venue-form";
+import { Edit } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 type Team = Omit<TeamWithPlayers, "id"> & { _id: string };
 
@@ -16,6 +19,7 @@ const VenueCard = ({
   description,
   id,
   teams,
+  type,
 }: {
   name: string;
   id: string;
@@ -24,8 +28,10 @@ const VenueCard = ({
   imageUrl: string;
   streamLink: string;
   description: string;
+  type?: "MY_VENUE";
   teams: Team[];
 }) => {
+  const router = useRouter();
   return (
     <div className="w-full h-52 flex">
       <div className="w-36 h-full">
@@ -43,9 +49,19 @@ const VenueCard = ({
       </div>
       <div className="size-full px-16 py-2">
         <div
-          className="size-full border rounded-xl border-[#484848] bg-[#282828] cursor-pointer hover:border-[#686868] transition-colors max-w-[85%] px-4 pt-2 pb-1 flex justify-between gap-4 group "
-          onClick={() => addUrlParams({ param: "venue", value: id })}
+          className={`size-full border rounded-xl border-[#484848] bg-[#282828] cursor-pointer hover:border-[#686868] transition-colors max-w-[85%] px-4 pt-2 pb-1 flex justify-between gap-4 ${
+            type == "MY_VENUE" ? "group" : ""
+          } relative`}
+          onClick={() => {
+            type === "MY_VENUE"
+              ? router.push(`/create?venue=${id}`)
+              : addUrlParams({ param: "venue", value: id });
+          }}
         >
+          <div className="absolute px-3 py-1 size-full flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity gap-2">
+            <Edit />
+            Edit
+          </div>
           <div className="flex flex-col gap-2">
             <div className="w-full h-10 flex items-center justify-start gap-2 font-normal tracking-wider">
               <div className="size-3 rounded-full bg-orange-400 animate-pulse flex-shrink-0" />

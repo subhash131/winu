@@ -17,6 +17,9 @@ const Navbar = () => {
         <li>
           <Link href="/create">Create</Link>
         </li>
+        <li>
+          <Link href="/my-venues">My venues</Link>
+        </li>
       </ul>
       <div className="w-full justify-end items-center flex">
         <WalletButton />

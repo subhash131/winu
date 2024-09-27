@@ -4,7 +4,6 @@ import { addUrlParams } from "@/helpers/add-url-params";
 import { convertISOToTime } from "@/helpers/convert-iso-time";
 import { formatEndDate } from "@/helpers/format-end-date";
 import { formatStartDate } from "@/helpers/format-start-date";
-import { useProgram } from "@/hooks/use-program";
 import { CreateVenue } from "@/state-manager/features/create-venue-form";
 import { TPlayer } from "@/types/player";
 import { CopyIcon } from "lucide-react";
@@ -25,6 +24,7 @@ const BidModal = () => {
 
   const fetchVenue = async () => {
     if (!venueId) return;
+    
     startTransition(async () => {
       const res = await getVenueById(venueId);
       setVenue(res);
