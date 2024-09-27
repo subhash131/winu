@@ -96,14 +96,13 @@ const CreateButton = () => {
     }
   };
 
-  if (venueId) return;
   return (
     <button
       className="bg-white text-black font-semibold px-10 py-2 rounded-lg active:scale-95 transition-transform disabled:bg-gray-300 disabled:scale-100"
       onClick={create}
       disabled={loading}
     >
-      Create venue
+      {venueId ? "Update" : "Create venue"}
     </button>
   );
 };
