@@ -1,13 +1,18 @@
 "use client";
 import { createVenue } from "@/actions/create-venue";
+import { registerVenue } from "@/contract-actions/register-venue";
 import { addUrlParams } from "@/helpers/add-url-params";
 import { combineDateAndTime } from "@/helpers/combine-date-time";
 import { RootState } from "@/state-manager/store";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { AnchorProvider, Idl, Program } from "@project-serum/anchor";
+import { useAnchorWallet, useConnection } from "@solana/wallet-adapter-react";
 import { useSearchParams } from "next/navigation";
-import React, { useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
+
+import IDL from "@/helpers/contract/idl.json";
+import { PROGRAM_ID } from "@/helpers/contract/constants";
 
 const CreateButton = () => {
   const {
@@ -21,18 +26,36 @@ const CreateButton = () => {
     imageUrl,
   } = useSelector((state: RootState) => state.CreateVenue);
   const [loading, startTransition] = useTransition();
-  const wallet = useWallet();
   const venueId = useSearchParams().get("venue");
+  const wallet = useAnchorWallet();
 
-  const parsedStartDate = combineDateAndTime(
-    startDate,
-    startTime
-  ).toISOString();
-  
-  const parsedEndDate = combineDateAndTime(endDate, endTime).toISOString();
+  const { connection } = useConnection();
 
   const create = async () => {
-    const userId = wallet.publicKey?.toString();
+    if (!name) {
+      toast.error("Venue name is missing");
+      return;
+    }
+    if (!streamLink) {
+      toast.error("stream Link is missing");
+      return;
+    }
+
+    if (!wallet) {
+      toast.error("please connect your wallet!");
+      return;
+    }
+    if (!PROGRAM_ID) {
+      toast.error(
+        "Environment variables missing, please contact the developer!"
+      );
+      return;
+    }
+    const provider = new AnchorProvider(connection, wallet, {
+      commitment: "confirmed",
+    });
+    const program = new Program(IDL as Idl, PROGRAM_ID, provider);
+    const userId = wallet?.publicKey?.toString();
     if (!userId) {
       toast.error("Please Connect your wallet");
       return;
@@ -40,6 +63,16 @@ const CreateButton = () => {
 
     try {
       startTransition(async () => {
+        const parsedStartDate = combineDateAndTime(
+          startDate,
+          startTime
+        ).toISOString();
+
+        const parsedEndDate = combineDateAndTime(
+          endDate,
+          endTime
+        ).toISOString();
+
         const res = await createVenue({
           createdBy: userId,
           description,
@@ -50,8 +83,12 @@ const CreateButton = () => {
           endDate: parsedEndDate,
         });
         if (res) {
+          await registerVenue({
+            venueId: res._id,
+            program,
+            wallet: wallet?.publicKey,
+          });
           addUrlParams({ param: "venue", value: res._id });
-          toast.success("Venue created..! Add Teams..");
         }
       });
     } catch (err) {

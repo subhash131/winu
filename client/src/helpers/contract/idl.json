@@ -3,23 +3,22 @@
   "name": "winu",
   "instructions": [
     {
-      "name": "initMaster",
+      "name": "getBalance",
       "accounts": [
-        { "name": "master", "isMut": true, "isSigner": false },
-        { "name": "payer", "isMut": true, "isSigner": true },
+        { "name": "venue", "isMut": true, "isSigner": false },
         { "name": "systemProgram", "isMut": false, "isSigner": false }
       ],
-      "args": []
+      "args": [{ "name": "venueId", "type": "string" }],
+      "returns": "u64"
     },
     {
       "name": "createVenue",
       "accounts": [
         { "name": "venue", "isMut": true, "isSigner": false },
         { "name": "authority", "isMut": true, "isSigner": true },
-        { "name": "master", "isMut": true, "isSigner": false },
         { "name": "systemProgram", "isMut": false, "isSigner": false }
       ],
-      "args": [{ "name": "bidPrice", "type": "u64" }]
+      "args": [{ "name": "venueId", "type": "string" }]
     },
     {
       "name": "placeBid",
@@ -29,7 +28,10 @@
         { "name": "buyer", "isMut": true, "isSigner": true },
         { "name": "systemProgram", "isMut": false, "isSigner": false }
       ],
-      "args": [{ "name": "venueId", "type": "u32" }]
+      "args": [
+        { "name": "venueId", "type": "string" },
+        { "name": "bidId", "type": "string" }
+      ]
     },
     {
       "name": "pickWinner",
@@ -39,7 +41,7 @@
         { "name": "systemProgram", "isMut": false, "isSigner": false }
       ],
       "args": [
-        { "name": "venueId", "type": "u32" },
+        { "name": "venueId", "type": "string" },
         { "name": "winner", "type": "publicKey" }
       ]
     },
@@ -52,8 +54,8 @@
         { "name": "systemProgram", "isMut": false, "isSigner": false }
       ],
       "args": [
-        { "name": "venueId", "type": "u32" },
-        { "name": "bidId", "type": "u32" }
+        { "name": "venueId", "type": "string" },
+        { "name": "bidId", "type": "string" }
       ]
     }
   ],
@@ -63,9 +65,9 @@
       "type": {
         "kind": "struct",
         "fields": [
-          { "name": "id", "type": "u32" },
+          { "name": "id", "type": "string" },
           { "name": "authority", "type": "publicKey" },
-          { "name": "venueId", "type": "u32" }
+          { "name": "venueId", "type": "string" }
         ]
       }
     },
@@ -74,10 +76,10 @@
       "type": {
         "kind": "struct",
         "fields": [
-          { "name": "id", "type": "u32" },
+          { "name": "id", "type": "string" },
           { "name": "authority", "type": "publicKey" },
           { "name": "bidPrice", "type": "u64" },
-          { "name": "lastBidId", "type": "u32" },
+          { "name": "bidCount", "type": "u32" },
           { "name": "winner", "type": { "option": "publicKey" } },
           { "name": "claimed", "type": "bool" }
         ]

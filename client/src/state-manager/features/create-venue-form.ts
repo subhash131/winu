@@ -36,18 +36,7 @@ const initialState: CreateVenue = {
   streamLink: "",
   name: "",
   description: "",
-  teams: [
-    {
-      name: "Team 1",
-      id: uuidv4(),
-      players: [
-        { username: "", id: uuidv4() },
-        { username: "", id: uuidv4() },
-      ],
-    },
-    { name: "Team 2", id: uuidv4(), players: [{ username: "", id: uuidv4() }] },
-    { name: "Team 3", id: uuidv4(), players: [{ username: "", id: uuidv4() }] },
-  ],
+  teams: [],
 };
 
 const createVenue = createSlice({
@@ -89,10 +78,11 @@ const createVenue = createSlice({
         state.startTime = "14:00";
         state.streamLink = streamLink;
 
-        console.log(teams);
-        const formattedTeams = teams.map((team: any) => {
-          return { ...team, id: team._id };
-        });
+        const formattedTeams =
+          teams &&
+          teams.map((team: any) => {
+            return { ...team, id: team._id };
+          });
         state.teams = formattedTeams;
       }
     ),

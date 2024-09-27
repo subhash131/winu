@@ -23,52 +23,31 @@ export const getProgram = (connection: Connection, wallet: Wallet) => {
   return program;
 };
 
-export const getMasterAddress = async () => {
-  if (!PROGRAM_ID) {
-    return { msg: "PROGRAM_ID not found!" };
-  }
-  if (!MASTER_SEED) {
-    return { msg: "MASTER_SEED not found!" };
-  }
-  return (
-    await PublicKey.findProgramAddressSync(
-      [Buffer.from(MASTER_SEED)],
-      new PublicKey(PROGRAM_ID)
-    )
-  )[0];
-};
-
-export const getVenueAddress = async (id: number) => {
+export const getVenueAddress = (id: string) => {
   if (!VENUE_SEED) {
     return { msg: "VENUE_SEED not found!" };
   }
   if (!PROGRAM_ID) {
     return { msg: "PROGRAM_ID not found!" };
   }
-  return (
-    await PublicKey.findProgramAddressSync(
-      [Buffer.from(VENUE_SEED), new BN(id).toArrayLike(Buffer, "le", 4)],
-      new PublicKey(PROGRAM_ID)
-    )
+  console.log("🚀 ~ getVenueAddress ~ id:", id);
+  console.log("🚀 ~ getVenueAddress ~ VENUE_SEED:", VENUE_SEED);
+  return PublicKey.findProgramAddressSync(
+    [Buffer.from(VENUE_SEED), Buffer.from(id)],
+    new PublicKey(PROGRAM_ID)
   )[0];
 };
 
-export const getBidAddress = async (venuePk: PublicKey, id: number) => {
+export const getBidAddress = (venuePk: PublicKey, id: string) => {
   if (!BID_SEED) {
     return { msg: "VENUE_SEED not found!" };
   }
   if (!PROGRAM_ID) {
     return { msg: "Program id not found!" };
   }
-  return (
-    await PublicKey.findProgramAddressSync(
-      [
-        Buffer.from(BID_SEED),
-        venuePk.toBuffer(),
-        new BN(id).toArrayLike(Buffer, "le", 4),
-      ],
-      new PublicKey(PROGRAM_ID)
-    )
+  return PublicKey.findProgramAddressSync(
+    [Buffer.from(BID_SEED), venuePk.toBuffer(), Buffer.from(id)],
+    new PublicKey(PROGRAM_ID)
   )[0];
 };
 

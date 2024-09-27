@@ -22,6 +22,7 @@ const TeamName = () => {
   };
 
   useEffect(() => {
+    if (!teams) return;
     const activeTeam = teams.find((team) => team.id === activeTeamId);
     if (activeTeam) {
       setTeamName(activeTeam.name);
