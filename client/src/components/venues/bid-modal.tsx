@@ -24,7 +24,7 @@ const BidModal = () => {
 
   const fetchVenue = async () => {
     if (!venueId) return;
-    
+
     startTransition(async () => {
       const res = await getVenueById(venueId);
       setVenue(res);
@@ -112,6 +112,11 @@ const BidModal = () => {
             </div>
             <div className="size-full">
               <p className="text-xl pb-4">Participants</p>
+              {venue.teams.length <= 0 && (
+                <p className="text-red-500 font-semibold w-full">
+                  The host hasn't added the players yet. Stay tuned!
+                </p>
+              )}
               <div className="w-full grid [grid-template-columns:repeat(auto-fit,minmax(250px,300px))] gap-4">
                 {venue.teams.map((team) => {
                   return (
@@ -178,58 +183,60 @@ const BidModal = () => {
                 })}
               </div>
             </div>
-            <div className="size-full pb-20">
-              <p className="text-xl pb-4">My Fantasy Team</p>
-              {fantasyTeam.length === 0 && (
-                <p className="w-full text-red-500">
-                  Select players from the above participants list!
-                </p>
-              )}
-              <div className="w-full grid [grid-template-columns:repeat(auto-fit,minmax(250px,300px))] gap-4">
-                {fantasyTeam.map(({ _id, username, imageUrl }) => {
-                  return (
-                    <div
-                      className="h-fit rounded-lg border border-active px-4 py-3 flex items-center gap-2"
-                      key={_id}
-                    >
-                      <div className="size-full flex items-center gap-2">
-                        <Image
-                          src={imageUrl || "/icon.svg"}
-                          alt="player"
-                          width={1}
-                          height={1}
-                          className="size-6 flex-shrink-0 border border-active rounded-full"
-                        />
-                        <p className="uppercase tracking-wider font-normal">
-                          {username}
-                        </p>
-                      </div>
-                      <button
-                        className="p-1 rounded-full border border-active"
-                        onClick={() => {
-                          setFantasyTeam((prev) => {
-                            const updatedTeam = prev.filter(
-                              (team) => team._id != _id
-                            );
-                            return updatedTeam;
-                          });
-                        }}
+            {venue.teams.length > 0 && (
+              <div className="size-full pb-20">
+                <p className="text-xl pb-4">My Fantasy Team</p>
+                {fantasyTeam.length <= 0 && (
+                  <p className="w-full text-red-500">
+                    Select 4 players from the above participants list!
+                  </p>
+                )}
+                <div className="w-full grid [grid-template-columns:repeat(auto-fit,minmax(250px,300px))] gap-4">
+                  {fantasyTeam.map(({ _id, username, imageUrl }) => {
+                    return (
+                      <div
+                        className="h-fit rounded-lg border border-active px-4 py-3 flex items-center gap-2"
+                        key={_id}
                       >
-                        <IoMdClose size={18} />
-                      </button>
-                    </div>
-                  );
-                })}
+                        <div className="size-full flex items-center gap-2">
+                          <Image
+                            src={imageUrl || "/icon.svg"}
+                            alt="player"
+                            width={1}
+                            height={1}
+                            className="size-6 flex-shrink-0 border border-active rounded-full"
+                          />
+                          <p className="uppercase tracking-wider font-normal">
+                            {username}
+                          </p>
+                        </div>
+                        <button
+                          className="p-1 rounded-full border border-active"
+                          onClick={() => {
+                            setFantasyTeam((prev) => {
+                              const updatedTeam = prev.filter(
+                                (team) => team._id != _id
+                              );
+                              return updatedTeam;
+                            });
+                          }}
+                        >
+                          <IoMdClose size={18} />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="w-full h-16 font-normal uppercase py-10">
+                  <button
+                    className="px-6 py-2 rounded-lg bg-white disabled:bg-gray-400 text-black active:scale-95 transition-all"
+                    disabled={fantasyTeam.length !== 4}
+                  >
+                    Place Bid
+                  </button>
+                </div>
               </div>
-              <div className="w-full h-16 font-normal uppercase py-10">
-                <button
-                  className="px-6 py-2 rounded-lg bg-white disabled:bg-gray-400 text-black active:scale-95 transition-all"
-                  disabled={fantasyTeam.length !== 4}
-                >
-                  Place Bid
-                </button>
-              </div>
-            </div>
+            )}
           </div>
         )}
       </div>

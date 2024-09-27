@@ -5,11 +5,11 @@ import {
   updateATeamPlayerImage,
   updateATeamPlayerName,
 } from "@/state-manager/features/create-venue-form";
-import { RootState } from "@/state-manager/store";
 import Image from "next/image";
 import { TbPhotoUp } from "react-icons/tb";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "sonner";
+import { useSearchParams } from "next/navigation";
 
 export const PlayerCard = ({
   imageUrl,
@@ -23,7 +23,7 @@ export const PlayerCard = ({
   index: number;
 }) => {
   const [uploadProgress, setUploadProgress] = useState<number>();
-  const { activeTeamId } = useSelector((state: RootState) => state.CreateVenue);
+  const activeTeamId = useSearchParams().get("team");
   const dispatch = useDispatch();
   const { edgestore } = useFileStore();
 
