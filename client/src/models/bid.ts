@@ -1,25 +1,31 @@
-import { TPlayer } from "@/types/player";
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IBid extends Document {
-  userId: string;
-  venueId: string;
-  teamId: string;
+  user: string;
+  venue: string;
+  team: string;
+  won: boolean;
 }
 
 const Bid: Schema<IBid> = new Schema(
   {
-    userId: {
+    user: {
       type: String,
       required: [true, "userId is missing"],
     },
-    venueId: {
+    venue: {
       type: String,
       required: [true, "venueId is missing"],
+      ref: "Venue",
     },
-    teamId: {
+    team: {
       type: String,
       required: [true, "teamId is missing"],
+      ref: "Team",
+    },
+    won: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }
