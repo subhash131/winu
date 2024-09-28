@@ -24,7 +24,7 @@ const TeamPlayers = () => {
       {players.map(({ imageUrl, id, username }, idx) => (
         <PlayerCard
           id={id}
-          key={`player-card-${idx}`}
+          key={`player-card-${idx}-${id}`}
           username={username}
           imageUrl={imageUrl || "/icon.svg"}
           index={idx}

@@ -4,17 +4,14 @@ import { RootState } from "@/state-manager/store";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { createTeam } from "@/actions/create-team";
-import {
-  updateActiveTeamId,
-  updateATeamId,
-} from "@/state-manager/features/create-venue-form";
+import { updateATeamId } from "@/state-manager/features/create-venue-form";
 import { addUrlParams } from "@/helpers/add-url-params";
+import { useSearchParams } from "next/navigation";
 
 const SaveButton = () => {
   const [loading, startTransition] = useTransition();
-  const { teams, activeTeamId, id } = useSelector(
-    (state: RootState) => state.CreateVenue
-  );
+  const { teams, id } = useSelector((state: RootState) => state.CreateVenue);
+  const activeTeamId = useSearchParams().get("team");
   const dispatch = useDispatch();
 
   const handleSaveTeam = () => {
@@ -27,6 +24,7 @@ const SaveButton = () => {
               players: team.players,
               venueId: id,
               imageUrl: team.imageUrl,
+              activeTeamId,
             });
             if (newTeam) {
               toast.success("Saved!!");
