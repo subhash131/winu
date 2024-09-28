@@ -4,7 +4,7 @@ import VenueCard from "./venue-card";
 import { getActiveVenues } from "@/actions/get-active-venues";
 import { getPastVenues } from "@/actions/get-past-venues";
 import { useSearchParams } from "next/navigation";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { FaSpinner } from "react-icons/fa6";
 
 const VenueList = () => {
   const [venues, setVenues] = useState([]);
@@ -33,11 +33,11 @@ const VenueList = () => {
   return (
     <div className="h-full w-full overflow-scroll pb-32">
       <div
-        className={`flex gap-4 overflow-hidden transition-all text-white py-6 items-center  justify-center ${
+        className={`flex gap-2 overflow-hidden transition-all text-white py-6 items-center  justify-center ${
           loading ? "h-10 w-full" : "h-0 w-0"
         }`}
       >
-        <AiOutlineLoading3Quarters className="animate-spin" />
+        <FaSpinner className="animate-spin" />
         loading...
       </div>
       {venues.length <= 0 && (
