@@ -25,13 +25,13 @@ export const getProgram = (connection: Connection, wallet: Wallet) => {
 
 export const getVenueAddress = (id: string) => {
   if (!VENUE_SEED) {
-    return { msg: "VENUE_SEED not found!" };
+    console.log("VENUE_SEED is missing");
+    return;
   }
   if (!PROGRAM_ID) {
-    return { msg: "PROGRAM_ID not found!" };
+    console.log("PROGRAM_ID is missing");
+    return;
   }
-  console.log("🚀 ~ getVenueAddress ~ id:", id);
-  console.log("🚀 ~ getVenueAddress ~ VENUE_SEED:", VENUE_SEED);
   return PublicKey.findProgramAddressSync(
     [Buffer.from(VENUE_SEED), Buffer.from(id)],
     new PublicKey(PROGRAM_ID)

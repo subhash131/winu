@@ -18,7 +18,9 @@ const Navbar = () => {
           <Link href="/create">Create</Link>
         </li>
         <li>
-          <Link href="/my-venues">My venues</Link>
+          <Link href="/my-venues" className="text-nowrap">
+            My venues
+          </Link>
         </li>
       </ul>
       <div className="w-full justify-end items-center flex">

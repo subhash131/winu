@@ -14,7 +14,6 @@ import { useSearchParams } from "next/navigation";
 import { getVenueById } from "@/actions/get-venue-by-id";
 import { useDispatch } from "react-redux";
 import { updateVenueForm } from "@/state-manager/features/create-venue-form";
-import { getVenueAddress } from "@/helpers/contract/program";
 
 const CreateVenue = () => {
   const venueId = useSearchParams().get("venue");
@@ -29,7 +28,6 @@ const CreateVenue = () => {
   useEffect(() => {
     if (!venueId) return;
     getVenue();
-    console.log(getVenueAddress(venueId).toString());
   }, [venueId]);
 
   return (

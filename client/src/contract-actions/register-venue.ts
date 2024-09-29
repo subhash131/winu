@@ -24,7 +24,6 @@ export const registerVenue = async ({
     toast.error("Please connect your wallet");
     return;
   }
-  console.log("pppp----", program);
   if (!program) {
     toast.error("Contraction connection failed😕. Please refresh the page..");
     return;

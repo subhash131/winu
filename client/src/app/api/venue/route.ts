@@ -80,7 +80,6 @@ export async function PATCH(req: NextRequest) {
   try {
     const reqBody = await req.json();
     const { teams, venueId } = reqBody;
-    console.log("🚀 ~ venueId:", venueId);
     const res = await Venue.findOneAndUpdate(
       { _id: venueId },
       { $push: { teams: { $each: teams } } },

@@ -13,6 +13,7 @@ import React, { useEffect, useState, useTransition } from "react";
 import { FaSpinner } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { toast } from "sonner";
+import PlaceBidButton from "./place-bid-button";
 
 const BidModal = () => {
   const [venue, setVenue] = useState<CreateVenue>();
@@ -135,7 +136,6 @@ const BidModal = () => {
                       </div>
                       <div className="flex flex-col gap-2 pb-4">
                         {team.players.map(({ imageUrl, username, _id }) => {
-                          console.log("🚀 ~ {team.players.map ~ _id:", _id);
                           return (
                             <div
                               className="pl-6 font-normal flex items-center gap-2 cursor-pointer"
@@ -228,12 +228,7 @@ const BidModal = () => {
                   })}
                 </div>
                 <div className="w-full h-16 font-normal uppercase py-10">
-                  <button
-                    className="px-6 py-2 rounded-lg bg-white disabled:bg-gray-400 text-black active:scale-95 transition-all"
-                    disabled={fantasyTeam.length !== 4}
-                  >
-                    Place Bid
-                  </button>
+                  <PlaceBidButton fantasyTeam={fantasyTeam} />
                 </div>
               </div>
             )}

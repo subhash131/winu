@@ -35,7 +35,6 @@ export async function POST(req: NextRequest) {
     const reqBody = await req.json();
 
     const { venueId, teamId, user } = reqBody;
-    console.log("🚀 ~ POST ~ reqBody:", reqBody);
 
     const newBid = new Bid({
       venue: venueId,
