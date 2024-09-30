@@ -2,10 +2,7 @@
 import { getBidAddress, getVenueAddress } from "@/helpers/contract/program";
 import { AnchorError, Idl, Program } from "@project-serum/anchor";
 import {
-  PublicKey,
   sendAndConfirmRawTransaction,
-  sendAndConfirmTransaction,
-  SendTransactionError,
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
