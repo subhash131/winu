@@ -6,11 +6,7 @@ import {
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
-import {
-  AnchorWallet,
-  useAnchorWallet,
-  Wallet,
-} from "@solana/wallet-adapter-react";
+import { AnchorWallet } from "@solana/wallet-adapter-react";
 import { toast } from "sonner";
 
 export const placeBid = async ({
@@ -25,12 +21,18 @@ export const placeBid = async ({
   wallet: AnchorWallet;
 }) => {
   const venuePk = getVenueAddress(venueId);
+  console.log("🚀 ~ venuePk:", venuePk?.toString());
 
   if (!venuePk) {
     return;
   }
 
   const bidPk = getBidAddress(venuePk, bidId);
+  console.log("🚀 ~ bidId:", bidId);
+  const tBidPk = getBidAddress(venuePk, "subhash");
+  console.log("🚀 ~ tBidPk:", tBidPk.toString());
+  console.log("🚀 ~ bidPk:", bidPk.toString());
+
   const provider = program?.provider;
   if (!provider) {
     toast.error("Failed to establish connection!");
@@ -73,8 +75,8 @@ export const placeBid = async ({
     );
 
     if (txSignature) {
-      return txSignature;
       toast.success("Bid Successful(devnet)!");
+      return txSignature;
     }
   } catch (err) {
     if (err instanceof AnchorError) {
@@ -82,6 +84,6 @@ export const placeBid = async ({
     }
 
     console.log("🚀 ~ placeBid ~ err:", err);
-    toast.error("Failed to place bid😢 Try again!");
+    toast.error("Failed to place bid😢! Check console for detailed error!");
   }
 };

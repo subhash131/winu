@@ -3,7 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface IBid extends Document {
   user: string;
   venue: string;
-  team: string;
+  team: mongoose.Types.ObjectId[];
   won: boolean;
 }
 
@@ -18,15 +18,11 @@ const Bid: Schema<IBid> = new Schema(
       required: [true, "venueId is missing"],
       ref: "Venue",
     },
-    team: {
-      type: String,
-      required: [true, "teamId is missing"],
-      ref: "Team",
-    },
     won: {
       type: Boolean,
       default: false,
     },
+    team: [{ type: mongoose.Schema.Types.ObjectId, ref: "Player" }],
   },
   { timestamps: true }
 );

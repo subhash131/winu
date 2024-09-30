@@ -13,15 +13,9 @@ export async function GET() {
   Player;
   Venue;
   try {
-    const res = await Bid.find()
-      .populate("user")
-      .populate("venue")
-      .populate({
-        path: "team",
-        populate: {
-          path: "players",
-        },
-      });
+    const res = await Bid.find().populate("user").populate("venue").populate({
+      path: "team",
+    });
     return NextResponse.json(res, { status: 200 });
   } catch (err) {
     console.log("🚀 ~ GET ~ err:", err);
@@ -34,12 +28,12 @@ export async function POST(req: NextRequest) {
   try {
     const reqBody = await req.json();
 
-    const { venueId, teamId, user } = reqBody;
+    const { venueId, user, team } = reqBody;
 
     const newBid = new Bid({
       venue: venueId,
-      team: teamId,
       user,
+      team,
     });
     const res = await newBid.save();
     return NextResponse.json({ ...res._doc }, { status: 201 });
