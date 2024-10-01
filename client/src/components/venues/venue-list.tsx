@@ -39,7 +39,7 @@ const VenueList = () => {
         <FaSpinner className="animate-spin" />
         loading...
       </div>
-      {venues.length <= 0 && (
+      {!loading && venues.length <= 0 && (
         <div className="size-full flex items-center justify-center">
           No venues..!
         </div>
