@@ -13,9 +13,17 @@ const LeaderBoard = () => {
     if (!venueId) return;
     startTransition(async () => {
       const res = await getBidByVenue(venueId);
-      console.log("🚀 ~ startTransition ~ res:", res);
       if (res.length > 0) {
-        setBids(res);
+        const parsedBid = res.map((bid: any) => {
+          const totalPoints = bid.team.reduce((total: number, t: any) => {
+            if (t) {
+              return total + t.points;
+            }
+          }, 0);
+          console.log("bid::", { ...bid, points: totalPoints });
+          return { ...bid, points: totalPoints };
+        });
+        setBids(parsedBid);
       }
     });
   };

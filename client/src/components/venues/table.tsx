@@ -29,13 +29,13 @@ export function LeaderTable({ bids }: { bids: any[] }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {bids.map(({ user, points, rank }) => (
-          <TableRow key={user} className="hover:bg-transparent">
+        {bids.map(({ user, points }, idx) => (
+          <TableRow key={user + points} className="hover:bg-transparent">
             <TableCell className="font-medium border border-active">
               {user}
             </TableCell>
             <TableCell className="border border-active">{points}</TableCell>
-            <TableCell className="border border-active">{rank}</TableCell>
+            <TableCell className="border border-active">{idx + 1}</TableCell>
           </TableRow>
         ))}
       </TableBody>
