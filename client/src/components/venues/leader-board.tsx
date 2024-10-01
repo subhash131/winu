@@ -34,7 +34,11 @@ const LeaderBoard = () => {
   return (
     <div className="px-6 py-4">
       {loading && <FaSpinner className="animate-spin " />}
-      {!loading && <LeaderTable bids={bids} />}
+      {!loading && (
+        <>
+          <LeaderTable bids={bids} />
+        </>
+      )}
     </div>
   );
 };

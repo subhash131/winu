@@ -10,11 +10,13 @@ import { IoMdClose } from "react-icons/io";
 
 import General from "./general";
 import LeaderBoard from "./leader-board";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const BidModal = () => {
   const [venue, setVenue] = useState<CreateVenue>();
   const [fantasyTeam, setFantasyTeam] = useState<TPlayer[]>([]);
   const venueId = useSearchParams().get("venue");
+  const wallet = useWallet();
 
   const [loading, startTransition] = useTransition();
 
@@ -66,6 +68,18 @@ const BidModal = () => {
           >
             Leader board
           </button>
+          {venue?.createdBy === wallet.publicKey?.toString() && (
+            <button
+              onClick={() => {
+                addUrlParams({ param: "modal", value: "manage" });
+              }}
+              className={`${
+                modal === "manage" ? "underline" : "text-gray-300"
+              }`}
+            >
+              Manage
+            </button>
+          )}
         </div>
         <div className="h-fit w-full backdrop-blur-lg flex items-center justify-between border-b px-6 border-[#484848] sticky top-0 py-2">
           <h2 className="text-2xl">{!loading && venue?.name}</h2>
