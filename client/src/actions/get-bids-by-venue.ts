@@ -8,10 +8,6 @@ export const getBidByVenue = async (id: string) => {
       console.log("id not found");
       return;
     }
-
-    const body = {
-      venueId: id,
-    };
     const res = await fetch(`${baseUrl}/api/bid?venueId=${id}`, {
       method: "GET",
       cache: "no-store",
