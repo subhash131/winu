@@ -11,3 +11,11 @@ input[type=file]::-webkit-file-upload-button {
   /* chromes and blink button */
   cursor: pointer;
 }
+
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}

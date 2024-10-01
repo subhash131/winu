@@ -23,7 +23,10 @@ const LeaderBoard = () => {
           console.log("bid::", { ...bid, points: totalPoints });
           return { ...bid, points: totalPoints };
         });
-        setBids(parsedBid);
+        const sortedBids = parsedBid.sort(
+          (a: any, b: any) => b.points - a.points
+        );
+        setBids(sortedBids);
       }
     });
   };
