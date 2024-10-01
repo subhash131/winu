@@ -10,6 +10,7 @@ import IDL from "@/helpers/contract/idl.json";
 import { PROGRAM_ID } from "@/helpers/contract/constants";
 import { FaSpinner } from "react-icons/fa6";
 import { useSearchParams } from "next/navigation";
+import { deleteBid } from "@/actions/delete-bid";
 
 const PlaceBidButton = ({ fantasyTeam }: { fantasyTeam: TPlayer[] }) => {
   const connection = useConnection();
@@ -51,6 +52,8 @@ const PlaceBidButton = ({ fantasyTeam }: { fantasyTeam: TPlayer[] }) => {
       if (tx) {
         console.log(tx);
         toast.success("Bid placed");
+      } else {
+        await deleteBid({ bidId: res._id });
       }
     });
   };
