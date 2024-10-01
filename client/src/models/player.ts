@@ -1,7 +1,9 @@
 import { TPlayer } from "@/types/player";
 import mongoose, { Document, Schema } from "mongoose";
 
-export interface IPlayer extends Document, Omit<TPlayer, "id" | "_id"> {}
+export interface IPlayer extends Document, Omit<TPlayer, "id" | "_id"> {
+  points: number;
+}
 
 const Player: Schema<IPlayer> = new Schema(
   {
@@ -11,7 +13,9 @@ const Player: Schema<IPlayer> = new Schema(
     },
     imageUrl: { type: String },
     description: { type: String },
+    points: { type: Number, default: 0 },
   },
+
   { timestamps: true }
 );
 

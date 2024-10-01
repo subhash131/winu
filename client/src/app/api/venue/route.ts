@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   Player;
   await connect();
   const start = req.nextUrl.searchParams.get("start") || 0;
-  const limit = req.nextUrl.searchParams.get("limit") || 10;
+  const limit = req.nextUrl.searchParams.get("limit") || 30;
   const past = req.nextUrl.searchParams.get("past");
 
   const currentTime = new Date();

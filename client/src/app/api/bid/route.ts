@@ -6,16 +6,21 @@ import Bid from "@/models/bid";
 import { NextRequest, NextResponse } from "next/server";
 import Player from "@/models/player";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   await connect();
   // load model
   Team;
   Player;
   Venue;
+  const venue = req.nextUrl.searchParams.get("venueId");
+
   try {
-    const res = await Bid.find().populate("user").populate("venue").populate({
-      path: "team",
-    });
+    const res = await Bid.find(venue ? { venue } : {})
+      .populate("user")
+      .populate("venue")
+      .populate({
+        path: "team",
+      });
     return NextResponse.json(res, { status: 200 });
   } catch (err) {
     console.log("🚀 ~ GET ~ err:", err);

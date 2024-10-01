@@ -13,6 +13,7 @@ export async function POST(req: NextRequest) {
       description,
       username,
       imageUrl,
+      points: 0,
     });
     const res = await newPlayer.save();
     return NextResponse.json({ ...res._doc }, { status: 201 });
