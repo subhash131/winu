@@ -13,6 +13,7 @@ const LeaderBoard = () => {
     if (!venueId) return;
     startTransition(async () => {
       const res = await getBidByVenue(venueId);
+      console.log("🚀 ~ startTransition ~ res:", res);
       if (res.length > 0) {
         setBids(res);
       }

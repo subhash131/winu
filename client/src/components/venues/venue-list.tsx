@@ -23,7 +23,6 @@ const VenueList = () => {
           res = await getActiveVenues();
       }
       if (res) setVenues(res);
-      console.log("🚀 ~ getVenues ~ res:", res);
     });
   };
 
