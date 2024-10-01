@@ -108,7 +108,7 @@ const BidModal = () => {
                 setFantasyTeam={setFantasyTeam}
               />
             )}
-            {modal === "manage" && <Manage />}
+            {modal === "manage" && <Manage venue={venue} />}
           </>
         )}
       </div>

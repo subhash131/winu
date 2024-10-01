@@ -96,7 +96,7 @@ const General = ({
                   <p className="text-xl underline">{team.name}</p>
                 </div>
                 <div className="flex flex-col gap-2 pb-4">
-                  {team.players.map(({ imageUrl, username, _id }) => {
+                  {team.players.map(({ imageUrl, username, _id, points, }) => {
                     return (
                       <div
                         className="pl-6 font-normal flex items-center gap-2 cursor-pointer"
@@ -111,7 +111,10 @@ const General = ({
                                 toast.error("Player is already in the team");
                                 return prev;
                               }
-                              return [...prev, { _id, username, imageUrl }];
+                              return [
+                                ...prev,
+                                { _id, username, imageUrl, points },
+                              ];
                             }
                             toast.error("Your team is full");
                             return prev;
