@@ -41,7 +41,6 @@ const PlaceBidButton = ({ fantasyTeam }: { fantasyTeam: TPlayer[] }) => {
         user: wallet.publicKey.toString(),
         venueId,
       });
-      console.log("🚀 ~ startTransition ~ res:", res._id);
 
       const tx = await placeBid({
         bidId: res._id,
