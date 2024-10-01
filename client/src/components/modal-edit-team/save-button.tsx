@@ -10,8 +10,9 @@ import { useSearchParams } from "next/navigation";
 
 const SaveButton = () => {
   const [loading, startTransition] = useTransition();
-  const { teams, id } = useSelector((state: RootState) => state.CreateVenue);
+  const { teams } = useSelector((state: RootState) => state.CreateVenue);
   const activeTeamId = useSearchParams().get("team");
+  const venueId = useSearchParams().get("venue")!;
   const dispatch = useDispatch();
 
   const handleSaveTeam = () => {
@@ -22,7 +23,7 @@ const SaveButton = () => {
             const newTeam = await createTeam({
               name: team.name,
               players: team.players,
-              venueId: id,
+              venueId,
               imageUrl: team.imageUrl,
               activeTeamId,
             });
