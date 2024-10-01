@@ -11,6 +11,7 @@ import { IoMdClose } from "react-icons/io";
 import General from "./general";
 import LeaderBoard from "./leader-board";
 import { useWallet } from "@solana/wallet-adapter-react";
+import Manage from "./manage";
 
 const BidModal = () => {
   const [venue, setVenue] = useState<CreateVenue>();
@@ -47,13 +48,13 @@ const BidModal = () => {
         className="w-[90%] h-[90%] rounded-xl border border-[#484848] bg-[#282828] overflow-x-hidden overflow-y-scroll relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="w-full h-10 border-b border-[#484848] flex px-6 items-center justify-start gap-4">
+        <div className="w-full h-10 border-b border-[#484848] flex px-6 items-center justify-start py-6">
           <button
             onClick={() => {
-              addUrlParams({ param: "modal", value: "" });
+              addUrlParams({ param: "modal", value: "general" });
             }}
-            className={`${
-              modal === "leader-board" ? "text-gray-300" : "underline"
+            className={`px-3 py-1 rounded-lg transition-colors ${
+              modal === "general" ? "bg-[#383838]" : "text-gray-300"
             }`}
           >
             General
@@ -62,8 +63,8 @@ const BidModal = () => {
             onClick={() => {
               addUrlParams({ param: "modal", value: "leader-board" });
             }}
-            className={`${
-              modal === "leader-board" ? "underline" : "text-gray-300"
+            className={`px-3 py-1 rounded-lg transition-colors ${
+              modal === "leader-board" ? "bg-[#383838]" : "text-gray-300"
             }`}
           >
             Leader board
@@ -73,11 +74,11 @@ const BidModal = () => {
               onClick={() => {
                 addUrlParams({ param: "modal", value: "manage" });
               }}
-              className={`${
-                modal === "manage" ? "underline" : "text-gray-300"
+              className={`px-3 py-1 rounded-lg transition-colors ${
+                modal === "manage" ? "bg-[#383838]" : "text-gray-300"
               }`}
             >
-              Manage
+              Manage (Host)
             </button>
           )}
         </div>
@@ -99,15 +100,15 @@ const BidModal = () => {
 
         {!loading && venue && (
           <>
-            {modal === "leader-board" ? (
-              <LeaderBoard />
-            ) : (
+            {modal === "leader-board" && <LeaderBoard />}
+            {modal === "general" && (
               <General
                 venue={venue}
                 fantasyTeam={fantasyTeam}
                 setFantasyTeam={setFantasyTeam}
               />
             )}
+            {modal === "manage" && <Manage />}
           </>
         )}
       </div>
