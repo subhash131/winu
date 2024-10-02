@@ -12,7 +12,7 @@ const Navbar = () => {
       </Link>
       <ul className="flex items-center justify-center size-full gap-10 font-medium">
         <li>
-          <Link href="/home?type=UPCOMING">Home</Link>
+          <Link href="/home?type=active">Home</Link>
         </li>
         <li>
           <Link href="/create">Create</Link>

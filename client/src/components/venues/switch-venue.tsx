@@ -10,8 +10,8 @@ const SwitchVenue = () => {
   const fetchPastVenues = () => {
     addUrlParams({ param: "type", value: "PAST" });
   };
-  const fetchUpcomingVenues = () => {
-    addUrlParams({ param: "type", value: "UPCOMING" });
+  const fetchActiveVenues = () => {
+    addUrlParams({ param: "type", value: "active" });
   };
 
   return (
@@ -21,8 +21,8 @@ const SwitchVenue = () => {
           type == "PAST" ? "right-0" : "right-24"
         }`}
       />
-      <button className="w-24 h-full text-center" onClick={fetchUpcomingVenues}>
-        Upcoming
+      <button className="w-24 h-full text-center" onClick={fetchActiveVenues}>
+        Active
       </button>
       <button className="w-24 h-full text-center" onClick={fetchPastVenues}>
         Past

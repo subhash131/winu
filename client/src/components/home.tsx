@@ -8,7 +8,7 @@ const Home = () => {
   const type = useSearchParams().get("type");
   useLayoutEffect(() => {
     if (!type) {
-      addUrlParams({ param: "type", value: "UPCOMING" });
+      addUrlParams({ param: "type", value: "active" });
     }
   }, []);
   return (

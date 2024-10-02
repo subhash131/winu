@@ -43,7 +43,12 @@ export function LeaderTable({ bids }: { bids: any[] }) {
               )}
             </TableCell>
             <TableCell className="border border-active">{points}</TableCell>
-            <TableCell className="border border-active">{idx + 1}</TableCell>
+            <TableCell className="border border-active">
+              {idx + 1}{" "}
+              {idx === 0 && (
+                <span className="text-active ml-2">(Winner👑)</span>
+              )}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
