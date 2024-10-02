@@ -65,21 +65,11 @@ const List = ({ player }: { player: TPlayer }) => {
       />
       <div className="flex gap-2">
         <button
-          className="p-2 rounded-full bg-[#383838] hover:bg-[#484848] transition-colors disabled:bg-[#181818]"
+          className="p-2 rounded-full bg-[#181818] hover:bg-[#484848] transition-colors disabled:bg-[#181818]"
           disabled={input === player.points}
           onClick={updatePoints}
         >
           <FaCheck />
-        </button>
-        <button
-          className="p-2 rounded-full bg-[#383838] hover:bg-[#484848] transition-colors disabled:bg-[#181818]"
-          disabled={input === player.points}
-          onClick={() => {
-            if (!player.points) setInput(0);
-            else setInput(player.points);
-          }}
-        >
-          <FaXmark />
         </button>
       </div>
     </div>

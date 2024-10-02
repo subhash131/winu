@@ -25,6 +25,9 @@ const BidModal = () => {
 
   const fetchVenue = async () => {
     if (!venueId) return;
+    if (!modal) {
+      addUrlParams({ param: "modal", value: "general" });
+    }
 
     startTransition(async () => {
       const res = await getVenueById(venueId);

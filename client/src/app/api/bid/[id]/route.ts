@@ -19,3 +19,21 @@ export async function DELETE(
     );
   }
 }
+
+export async function POST(
+  req: NextRequest,
+  { params: { id } }: { params: { id: string } }
+) {
+  await connect();
+  try {
+    const res = await Bid.findByIdAndUpdate(id, { won: true });
+
+    return NextResponse.json({ ...res }, { status: 200 });
+  } catch (err: any) {
+    console.log("🚀 ~ POST ~ err:", err);
+    return NextResponse.json(
+      { error: err.errorResponse.errmsg },
+      { status: 500 }
+    );
+  }
+}

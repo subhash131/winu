@@ -28,10 +28,6 @@ export const placeBid = async ({
   }
 
   const bidPk = getBidAddress(venuePk, bidId);
-  console.log("🚀 ~ bidId:", bidId);
-  const tBidPk = getBidAddress(venuePk, "subhash");
-  console.log("🚀 ~ tBidPk:", tBidPk.toString());
-  console.log("🚀 ~ bidPk:", bidPk.toString());
 
   const provider = program?.provider;
   if (!provider) {

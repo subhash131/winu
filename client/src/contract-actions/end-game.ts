@@ -10,44 +10,58 @@ import { toast } from "sonner";
 
 export const endGame = async ({
   venueId,
+  winner,
   program,
   wallet,
 }: {
   venueId: string;
   program?: Program<Idl>;
   wallet?: PublicKey;
+  winner: PublicKey;
 }) => {
-  const venuePk = getVenueAddress(venueId);
+  // Get the venue address based on venueId
+  const venuePk = await getVenueAddress(venueId);
 
-  // await program.account.userProfile.fetch(userPublickey)
+  // Validate wallet connection
   if (!wallet) {
     toast.error("Please connect your wallet");
     return;
   }
+
+  // Validate program instance
   if (!program) {
-    toast.error("Contraction connection failed😕. Please refresh the page..");
+    toast.error("Contract connection failed 😕. Please refresh the page.");
     return;
   }
+
   try {
+    if (!venuePk) {
+      toast.error("Failed to generate primary key.");
+      return;
+    }
+
     const txHash = await program.methods
-      .pickWinner(venueId)
+      .pickWinner(venueId, winner)
       .accounts({
         venue: venuePk,
         authority: wallet,
         systemProgram: SystemProgram.programId,
       })
       .rpc();
+
     if (txHash) {
-      toast.success("Venue created on devnet!");
+      toast.success("Game Ended successfully! 🎉 Transaction Hash: " + txHash);
     }
-  } catch (err) {
+  } catch (err: any) {
+    // Handle different types of errors
     if (err instanceof AnchorError) {
-      toast.error(err.error.errorMessage);
+      toast.error(`Anchor Error: ${err.error.errorMessage}`);
+    } else if (err instanceof SendTransactionError) {
+      toast.error(`Transaction Error: ${err.message}`);
+    } else {
+      toast.error("Failed to End Game! 😢 Please try again.");
     }
-    if (err instanceof SendTransactionError) {
-      toast.error(err.message);
-    }
-    console.log("🚀 ~ createVenue ~ err:", err);
-    toast.error("Failed to create venue!😢");
+
+    console.error("Error ending game:", err);
   }
 };

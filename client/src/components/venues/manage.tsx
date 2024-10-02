@@ -6,7 +6,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState, useTransition } from "react";
 import UpdatePoints from "./update-points";
-import FinishGame from "./finish-game";
+import EndGame from "./end-game";
 
 const Manage = () => {
   const [venue, setVenue] = useState<CreateVenue>();
@@ -40,9 +40,9 @@ const Manage = () => {
   }, [venue]);
 
   return (
-    <div className="px-6 pt-4 pb-10 size-full flex gap-2 items-center">
+    <div className="px-6 pt-4 pb-10 size-full flex flex-col gap-10 items-center">
       {players && <UpdatePoints players={players} />}
-      <FinishGame />
+      <EndGame />
     </div>
   );
 };
