@@ -4,9 +4,14 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState, useTransition } from "react";
 import { LeaderTable } from "./table";
 import { FaSpinner } from "react-icons/fa6";
+import { IBid } from "@/models/bid";
+
+type Bid = IBid & {
+  points: number;
+};
 
 const LeaderBoard = () => {
-  const [bids, setBids] = useState([]);
+  const [bids, setBids] = useState<Bid[]>([]);
   const [loading, startTransition] = useTransition();
   const venueId = useSearchParams().get("venue");
   const fetchBids = () => {
@@ -14,7 +19,7 @@ const LeaderBoard = () => {
     startTransition(async () => {
       const res = await getBidByVenue(venueId);
       if (res.length > 0) {
-        const parsedBid = res.map((bid: any) => {
+        const parsedBid: Bid[] = res.map((bid: Bid) => {
           const totalPoints = bid.team.reduce((total: number, t: any) => {
             if (t) {
               return total + t.points;
@@ -23,9 +28,7 @@ const LeaderBoard = () => {
           console.log("bid::", { ...bid, points: totalPoints });
           return { ...bid, points: totalPoints };
         });
-        const sortedBids = parsedBid.sort(
-          (a: any, b: any) => b.points - a.points
-        );
+        const sortedBids = parsedBid.sort((a, b) => b.points - a.points);
         setBids(sortedBids);
       }
     });

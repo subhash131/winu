@@ -22,6 +22,11 @@ const Navbar = () => {
             My venues
           </Link>
         </li>
+        <li>
+          <Link href="/my-bids?type=all" className="text-nowrap">
+            My bids
+          </Link>
+        </li>
       </ul>
       <div className="w-full justify-end items-center flex">
         <WalletButton />

@@ -15,6 +15,6 @@ export const getBidByVenue = async (id: string) => {
     const venues = await res.json();
     return venues;
   } catch (err) {
-    console.log("Failed to create venue", err);
+    console.log("Failed to fetch venue", err);
   }
 };

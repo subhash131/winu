@@ -5,6 +5,7 @@ export interface IBid extends Document {
   venue: string;
   team: mongoose.Types.ObjectId[];
   won: boolean;
+  claimed: boolean;
 }
 
 const Bid: Schema<IBid> = new Schema(
@@ -19,6 +20,10 @@ const Bid: Schema<IBid> = new Schema(
       ref: "Venue",
     },
     won: {
+      type: Boolean,
+      default: false,
+    },
+    claimed: {
       type: Boolean,
       default: false,
     },
