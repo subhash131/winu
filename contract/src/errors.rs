@@ -6,7 +6,7 @@ pub enum VenueError {
     ActionDenied,
     #[msg("Winner already declared..!")]
     WinnerDeclared,
-    #[msg("No bids found..!")]
+    #[msg("Insufficient bids! Expected at least 5 bids.")]
     NoBids,
     #[msg("Prize already claimed..!")]
     AlreadyClaimed,
