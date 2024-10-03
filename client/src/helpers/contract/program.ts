@@ -40,13 +40,25 @@ export const getVenueAddress = (id: string) => {
 
 export const getBidAddress = (venuePk: PublicKey, id: string) => {
   if (!BID_SEED) {
-    return { msg: "VENUE_SEED not found!" };
+    return { msg: "BID_SEED not found!" };
   }
   if (!PROGRAM_ID) {
     return { msg: "Program id not found!" };
   }
   return PublicKey.findProgramAddressSync(
     [Buffer.from(BID_SEED), venuePk.toBuffer(), Buffer.from(id)],
+    new PublicKey(PROGRAM_ID)
+  )[0];
+};
+export const getMasterAddress = () => {
+  if (!MASTER_SEED) {
+    return { msg: "MASTER_SEED not found!" };
+  }
+  if (!PROGRAM_ID) {
+    return { msg: "Program id not found!" };
+  }
+  return PublicKey.findProgramAddressSync(
+    [Buffer.from(MASTER_SEED)],
     new PublicKey(PROGRAM_ID)
   )[0];
 };

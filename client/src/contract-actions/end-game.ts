@@ -1,5 +1,6 @@
 "use client";
-import { getVenueAddress } from "@/helpers/contract/program";
+import { MASTER_OWNER } from "@/helpers/contract/constants";
+import { getMasterAddress, getVenueAddress } from "@/helpers/contract/program";
 import { AnchorError, Idl, Program } from "@project-serum/anchor";
 import {
   PublicKey,
@@ -21,7 +22,7 @@ export const endGame = async ({
 }) => {
   // Get the venue address based on venueId
   const venuePk = getVenueAddress(venueId);
-  console.log("🚀 ~ venuePk:", venuePk);
+  const masterPk = getMasterAddress();
 
   // Validate wallet connection
   if (!wallet) {
@@ -35,6 +36,8 @@ export const endGame = async ({
     return;
   }
 
+  const masterOwnerAccount = MASTER_OWNER;
+
   try {
     if (!venuePk) {
       toast.error("Failed to generate primary key.");
@@ -45,6 +48,8 @@ export const endGame = async ({
       .pickWinner(venueId, winner)
       .accounts({
         venue: venuePk,
+        master: masterPk,
+        masterOwnerAccount,
         authority: wallet,
         systemProgram: SystemProgram.programId,
       })
