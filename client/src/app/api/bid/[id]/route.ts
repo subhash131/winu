@@ -25,8 +25,18 @@ export async function POST(
   { params: { id } }: { params: { id: string } }
 ) {
   await connect();
+  const type = req.nextUrl.searchParams.get("type");
+
+  const query: { won?: boolean; claimed?: boolean } = {};
+
+  if (type == "won") {
+    query.won = true;
+  } else if (type == "claimed") {
+    query.claimed = true;
+  }
+
   try {
-    const res = await Bid.findByIdAndUpdate(id, { won: true });
+    const res = await Bid.findByIdAndUpdate(id, query);
 
     return NextResponse.json({ ...res }, { status: 200 });
   } catch (err: any) {

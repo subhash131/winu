@@ -1,9 +1,9 @@
 "use server";
 const baseUrl = process.env.BASE_URL || "http://localhost:3000";
 
-export async function updateBidResult({ bidId }: { bidId: string }) {
+export async function updateBidClaimed({ bidId }: { bidId: string }) {
   try {
-    const res = await fetch(`${baseUrl}/api/bid/${bidId}?type=won`, {
+    const res = await fetch(`${baseUrl}/api/bid/${bidId}?type=claimed`, {
       method: "POST",
       cache: "no-store",
     });

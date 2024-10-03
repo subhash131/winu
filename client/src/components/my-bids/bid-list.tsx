@@ -55,6 +55,7 @@ const BidList = () => {
             claimed={claimed}
             venue={venue}
             key={`bids-${_id} venue`}
+            id={_id as string}
           />
         ))}
       </div>
