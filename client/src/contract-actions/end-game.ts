@@ -20,7 +20,8 @@ export const endGame = async ({
   winner: PublicKey;
 }) => {
   // Get the venue address based on venueId
-  const venuePk = await getVenueAddress(venueId);
+  const venuePk = getVenueAddress(venueId);
+  console.log("🚀 ~ venuePk:", venuePk);
 
   // Validate wallet connection
   if (!wallet) {

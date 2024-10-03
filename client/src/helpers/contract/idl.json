@@ -3,6 +3,15 @@
   "name": "winu",
   "instructions": [
     {
+      "name": "initMaster",
+      "accounts": [
+        { "name": "master", "isMut": true, "isSigner": false },
+        { "name": "authority", "isMut": true, "isSigner": true },
+        { "name": "systemProgram", "isMut": false, "isSigner": false }
+      ],
+      "args": []
+    },
+    {
       "name": "getBalance",
       "accounts": [
         { "name": "venue", "isMut": true, "isSigner": false },
@@ -37,6 +46,8 @@
       "name": "pickWinner",
       "accounts": [
         { "name": "venue", "isMut": true, "isSigner": false },
+        { "name": "master", "isMut": true, "isSigner": false },
+        { "name": "masterOwnerAccount", "isMut": true, "isSigner": false },
         { "name": "authority", "isMut": false, "isSigner": true },
         { "name": "systemProgram", "isMut": false, "isSigner": false }
       ],
@@ -89,7 +100,7 @@
       "name": "Master",
       "type": {
         "kind": "struct",
-        "fields": [{ "name": "lastId", "type": "u32" }]
+        "fields": [{ "name": "owner", "type": "publicKey" }]
       }
     }
   ],
@@ -104,7 +115,11 @@
       "name": "WinnerDeclared",
       "msg": "Winner already declared..!"
     },
-    { "code": 6002, "name": "NoBids", "msg": "No bids found..!" },
+    {
+      "code": 6002,
+      "name": "NoBids",
+      "msg": "Insufficient bids! Expected at least 5 bids."
+    },
     {
       "code": 6003,
       "name": "AlreadyClaimed",
