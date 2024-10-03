@@ -67,8 +67,8 @@ const BidCard = ({
       <div className="size-full flex justify-end flex-col px-4 z-10 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(0,0,0,0.9)] rounded-lg py-2">
         <p>{venue.name}</p>
         <div className="flex items-center justify-between pb-2">
-          {won && <p className="text-green-500">WON 1 SOL</p>}
-          {!won && <p className="text-red-500">LOST 1 SOL</p>}
+          {won && <p className="text-green-500">WON</p>}
+          {!won && <p className="text-red-500">LOST</p>}
           {won && !claimed && (
             <button
               className="bg-white text-black px-3 py-1 rounded-lg active:scale-95 transition-transform"
