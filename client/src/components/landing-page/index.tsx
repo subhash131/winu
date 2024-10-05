@@ -9,13 +9,13 @@ const SpinAnimation = dynamic(
 
 const LandingPage = () => {
   return (
-    <main className=" w-screen overflow-x-hidden text-white relative">
+    <main className=" w-screen overflow-hidden text-white relative">
       <GradientOverlay />
       <div className="h-screen w-full z-10 pointer-events-none relative">
         <SpinAnimation />
         <div className="absolute bottom-0 right-0 h-20 w-72 bg-black" />
       </div>
-      <div className="h-screen w-full "></div>
+      <div className="absolute size-full left-0 top-0 z-40 flex justify-between items-center"></div>
     </main>
   );
 };
