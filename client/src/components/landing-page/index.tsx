@@ -26,6 +26,7 @@ const LandingPage = () => {
           width={1}
           height={1}
           className="w-80 object-cover max-md:w-60"
+          priority
         />
         <div
           className={`w-full flex-col h-52 flex items-center justify-center gap-2 ${anton.className}`}
@@ -49,6 +50,7 @@ const LandingPage = () => {
           width={1}
           height={1}
           className="w-80 object-cover max-md:w-60"
+          priority
         />
       </div>
     </main>
