@@ -1,4 +1,3 @@
-"use client";
 import Spline from "@splinetool/react-spline/next";
 import { Spicy_Rice } from "next/font/google";
 import { Suspense } from "react";
