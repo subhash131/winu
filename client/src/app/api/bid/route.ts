@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
       });
     return NextResponse.json(res, { status: 200 });
   } catch (err) {
-    console.log("🚀 ~ GET ~ err:", err);
+    console.log("🚀 ~ BID ~ err:", err);
     return NextResponse.json({ error: err }, { status: 500 });
   }
 }
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     const res = await newBid.save();
     return NextResponse.json({ ...res._doc }, { status: 201 });
   } catch (err: any) {
-    console.log("🚀 ~ POST ~ err:", err);
+    console.log("🚀 ~ BID ~ err:", err);
     return NextResponse.json(
       { error: err.errorResponse.errmsg },
       { status: 500 }

@@ -49,8 +49,7 @@ const PlaceBidButton = ({ fantasyTeam }: { fantasyTeam: TPlayer[] }) => {
         wallet,
       });
       if (tx) {
-        console.log(tx);
-        toast.success("Bid placed");
+        toast.success(`Bid placed :: ${tx}`);
       } else {
         await deleteBid({ bidId: res._id });
       }

@@ -21,7 +21,6 @@ export const claimReward = async ({
   wallet: AnchorWallet;
 }) => {
   const venuePk = getVenueAddress(venueId);
-  console.log("🚀 ~ venuePk:", venuePk?.toString());
 
   if (!venuePk) {
     return;

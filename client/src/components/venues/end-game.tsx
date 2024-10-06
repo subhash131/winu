@@ -32,7 +32,6 @@ const EndGame = () => {
               return total + t.points;
             }
           }, 0);
-          console.log("bid::", { ...bid, points: totalPoints });
           return { ...bid, points: totalPoints };
         });
         const sortedBids = parsedBid.sort(

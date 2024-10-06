@@ -28,7 +28,6 @@ const List = ({ player }: { player: TPlayer }) => {
   const [input, setInput] = useState<number>(Number(player.points));
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(player._id);
     const value = e.target.value;
     const parsedValue = Number(value.replace(/^0+/, ""));
     if (!isNaN(parsedValue) && parsedValue >= 0) {

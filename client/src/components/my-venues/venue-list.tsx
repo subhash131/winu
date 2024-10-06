@@ -1,9 +1,8 @@
 "use client";
 import { getVenueByUserId } from "@/actions/get-venues-by-userId";
-import { useAnchorWallet, useWallet } from "@solana/wallet-adapter-react";
+import { useWallet } from "@solana/wallet-adapter-react";
 import React, { useEffect, useState, useTransition } from "react";
 import { FaSpinner } from "react-icons/fa6";
-import { toast } from "sonner";
 import VenueCard from "../venues/venue-card";
 
 const VenueList = () => {
@@ -20,7 +19,6 @@ const VenueList = () => {
     if (res.length > 0) {
       setMyVenues(res);
     }
-    console.log("🚀 ~ fetchMyVenues ~ res:", res);
     return res;
   };
 

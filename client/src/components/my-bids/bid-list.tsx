@@ -27,7 +27,6 @@ const BidList = () => {
         userId: wallet.publicKey?.toString(),
       });
       setBids(bids);
-      console.log("🚀 ~ startLoading ~ bids:", bids);
     });
   };
 

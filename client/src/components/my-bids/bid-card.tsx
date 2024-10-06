@@ -40,8 +40,7 @@ const BidCard = ({
     const provider = new AnchorProvider(connection, wallet, {
       commitment: "confirmed",
     });
-    console.log(venue._id);
-    console.log(id);
+
     const program = new Program(IDL as Idl, PROGRAM_ID, provider);
     startTransition(async () => {
       await claimReward({
