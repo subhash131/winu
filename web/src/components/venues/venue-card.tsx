@@ -102,7 +102,7 @@ const VenueCard = ({
                 })}
               </div>
               <p className="text-green-500 mt-1 flex-shrink-0">
-                WIN PRIZES UPTO 10,000 SOL
+                WIN PRIZES UPTO 100,000 SOL
               </p>
             </div>
           </div>
