@@ -11,7 +11,7 @@ pub struct Venue {
     pub id: String,
     pub authority: Pubkey,
     pub bid_price: u64,
-    pub bid_count: u32,
+    pub bid_count: u64,
     pub winner: Option<Pubkey>,
     pub claimed: bool,
 }

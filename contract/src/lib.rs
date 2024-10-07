@@ -8,7 +8,7 @@ mod errors;
 mod state;
 use crate::{constants::*, errors::*, state::*};
 
-declare_id!("7T3Qc3jSN6WHcmhr8JsJ5MgVhuRgzDVE696ZUKMHswZH");
+declare_id!("J1TJ1Lq1PzBC1Nmkz3JY8N85mQSooE7YVkWLUaaMsY5u");
 
 #[program]
 pub mod winu {
@@ -70,9 +70,13 @@ pub mod winu {
         let _master = &ctx.accounts.master;
         let master_owner_account = &mut ctx.accounts.master_owner_account;
 
-        let balance = venue.to_account_info().lamports();
-        let thirty_percent = balance * 30 / 100;
-        let twenty_percent = balance * 20 / 100;
+        let scaling_factor: u64 = 1000000000;
+        let minimum_lamports = 1;
+
+        let scaled_bid_count = venue.bid_count * scaling_factor;
+
+        let thirty_five_percent = std::cmp::max(scaled_bid_count * 35 / 100, minimum_lamports);
+        let ten_percent = std::cmp::max(scaled_bid_count * 10 / 100, minimum_lamports);
 
         if venue.winner.is_some() {
             return err!(VenueError::WinnerDeclared);
@@ -81,21 +85,21 @@ pub mod winu {
             return err!(VenueError::NoBids);
         }
         //Venue Host Payment
-        **venue.to_account_info().try_borrow_mut_lamports()? -= thirty_percent;
-        **host.to_account_info().try_borrow_mut_lamports()? += thirty_percent;
+        **venue.to_account_info().try_borrow_mut_lamports()? -= thirty_five_percent;
+        **host.to_account_info().try_borrow_mut_lamports()? += thirty_five_percent;
 
         //Platform Payment
-        **venue.to_account_info().try_borrow_mut_lamports()? -= twenty_percent;
+        **venue.to_account_info().try_borrow_mut_lamports()? -= ten_percent;
         **master_owner_account
             .to_account_info()
-            .try_borrow_mut_lamports()? += twenty_percent;
+            .try_borrow_mut_lamports()? += ten_percent;
 
         venue.winner = Some(winner);
 
         msg!(
             "{} received {} lamports for the venue {}",
             host.key(),
-            thirty_percent,
+            thirty_five_percent,
             venue.id
         );
 
@@ -107,8 +111,9 @@ pub mod winu {
         let bid = &ctx.accounts.bid;
         let winner = &ctx.accounts.authority;
 
-        let balance = venue.to_account_info().lamports();
-        let fifty_percent = balance / 2;
+        let scaling_factor: u64 = 1000000000;
+
+        let fifty_percent = venue.bid_count * scaling_factor / 2;
 
         if venue.claimed {
             return err!(VenueError::AlreadyClaimed);
