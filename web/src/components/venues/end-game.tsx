@@ -74,7 +74,7 @@ const EndGame = () => {
     fetchBids();
   }, []);
   return (
-    <div className="size-full px-10 py-2 flex items-start justify-center">
+    <div className="size-full mt-10 px-10 py-2 flex items-start justify-center">
       <button
         className="px-4 py-3 bg-[#383838] shadow-2xl border border-[#353535] hover:border-active active:scale-95 transition-all rounded-lg"
         type="button"

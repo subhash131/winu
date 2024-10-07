@@ -40,9 +40,11 @@ const Manage = () => {
   }, [venue]);
 
   return (
-    <div className="px-6 pt-4 pb-10 size-full flex flex-col gap-10 items-center">
-      {players && <UpdatePoints players={players} />}
-      <EndGame />
+    <div className="px-6 pt-4 pb-20 w-full h-fit flex flex-col gap-20 items-center">
+      <div>
+        {players && <UpdatePoints players={players} />}
+        <EndGame />
+      </div>
     </div>
   );
 };

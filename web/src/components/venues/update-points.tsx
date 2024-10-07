@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { toast } from "sonner";
 
-const UpdatePoints = ({ players }: { players: TPlayer[] }) => {
+const UpdatePoints = ({ players }: { players?: TPlayer[] }) => {
   return (
     <div className="h-full w-fit px-10">
       <div className="w-fit gap-5 py-2 border-b flex items-center justify-between">
