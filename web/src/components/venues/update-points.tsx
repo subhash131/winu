@@ -1,7 +1,8 @@
 import { updatePlayerPoints } from "@/actions/update-player-points";
 import { TPlayer } from "@/types/player";
+import Image from "next/image";
 import React, { useState } from "react";
-import { FaCheck, FaXmark } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa6";
 import { toast } from "sonner";
 
 const UpdatePoints = ({ players }: { players: TPlayer[] }) => {
@@ -53,7 +54,16 @@ const List = ({ player }: { player: TPlayer }) => {
       className="w-fit gap-5 h-10 flex items-center justify-between font-normal"
       key={`${player._id}-points-${player.username}`}
     >
-      <p className="w-40 ">{player.username}</p>
+      <div className="flex items-center justify-between gap-2">
+        <Image
+          src={player.imageUrl || "/icon.svg"}
+          alt="image"
+          width={1}
+          height={1}
+          className="size-8 rounded-full border-active border"
+        />
+        <p className="w-40 ">{player.username}</p>
+      </div>
       <input
         className="bg-transparent border-[#383838] border-b outline-none focus:border-b-2 transition-all w-20 text-center focus:border-active"
         onChange={handleInputChange}
