@@ -61,7 +61,7 @@ const VenueList = () => {
               description={description}
               teams={teams}
               id={_id}
-              type="MY_VENUE"
+              // type="MY_VENUE"
             />
           );
         }
