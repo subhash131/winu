@@ -90,7 +90,7 @@
           { "name": "id", "type": "string" },
           { "name": "authority", "type": "publicKey" },
           { "name": "bidPrice", "type": "u64" },
-          { "name": "bidCount", "type": "u32" },
+          { "name": "bidCount", "type": "u64" },
           { "name": "winner", "type": { "option": "publicKey" } },
           { "name": "claimed", "type": "bool" }
         ]
