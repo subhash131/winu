@@ -1,12 +1,19 @@
 "use client";
-import { addNewTeamPlayer } from "@/state-manager/features/create-venue-form";
+import {
+  addNewTeamPlayer,
+  updateActiveTeamId,
+} from "@/state-manager/features/create-venue-form";
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 const AddNewPlayer = () => {
   const dispatch = useDispatch();
   const activeTeamId = useSearchParams().get("team");
+
+  useEffect(() => {
+    dispatch(updateActiveTeamId(activeTeamId || ""));
+  }, [activeTeamId]);
 
   const handleAddNewPlayer = () => {
     if (activeTeamId) dispatch(addNewTeamPlayer({ teamId: activeTeamId }));
