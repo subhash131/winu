@@ -13,6 +13,7 @@ import { toast } from "sonner";
 
 import IDL from "@/helpers/contract/idl.json";
 import { PROGRAM_ID } from "@/helpers/contract/constants";
+import { updateVenueById } from "@/actions/update-venue-by-id";
 
 const CreateButton = () => {
   const {
@@ -31,7 +32,7 @@ const CreateButton = () => {
 
   const { connection } = useConnection();
 
-  const create = async () => {
+  const createOrUpdate = async () => {
     if (!name) {
       toast.error("Venue name is missing");
       return;
@@ -73,22 +74,38 @@ const CreateButton = () => {
           endTime
         ).toISOString();
 
-        const res = await createVenue({
-          createdBy: userId,
-          description,
-          imageUrl,
-          name,
-          streamLink,
-          startDate: parsedStartDate,
-          endDate: parsedEndDate,
-        });
-        if (res) {
-          await registerVenue({
-            venueId: res._id,
-            program,
-            wallet: wallet?.publicKey,
+        if (venueId) {
+          const res = await updateVenueById({
+            createdBy: userId,
+            description,
+            imageUrl,
+            name,
+            streamLink,
+            startDate: parsedStartDate,
+            endDate: parsedEndDate,
+            id: venueId,
           });
-          addUrlParams({ param: "venue", value: res._id });
+          if (res) {
+            toast.success("venue updated!");
+          }
+        } else {
+          const res = await createVenue({
+            createdBy: userId,
+            description,
+            imageUrl,
+            name,
+            streamLink,
+            startDate: parsedStartDate,
+            endDate: parsedEndDate,
+          });
+          if (res) {
+            await registerVenue({
+              venueId: res._id,
+              program,
+              wallet: wallet?.publicKey,
+            });
+            addUrlParams({ param: "venue", value: res._id });
+          }
         }
       });
     } catch (err) {
@@ -99,7 +116,7 @@ const CreateButton = () => {
   return (
     <button
       className="bg-white text-black font-semibold px-10 py-2 rounded-lg active:scale-95 transition-transform disabled:bg-gray-300 disabled:scale-100"
-      onClick={create}
+      onClick={createOrUpdate}
       disabled={loading}
     >
       {venueId ? "Update" : "Create venue"}
