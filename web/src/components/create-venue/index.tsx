@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useTransition } from "react";
 import ModalEditTeam from "../modal-edit-team";
 import StartDatetime from "./start-datetime";
 import EndDatetime from "./end-datetime";
@@ -14,15 +14,19 @@ import { useSearchParams } from "next/navigation";
 import { getVenueById } from "@/actions/get-venue-by-id";
 import { useDispatch } from "react-redux";
 import { updateVenueForm } from "@/state-manager/features/create-venue-form";
+import { FaSpinner } from "react-icons/fa6";
 
 const CreateVenue = () => {
   const venueId = useSearchParams().get("venue");
   const dispatch = useDispatch();
+  const [loading, startTransition] = useTransition();
 
-  const getVenue = async () => {
+  const getVenue = () => {
     if (!venueId) return;
-    const res = await getVenueById(venueId);
-    dispatch(updateVenueForm(res));
+    startTransition(async () => {
+      const res = await getVenueById(venueId);
+      dispatch(updateVenueForm(res));
+    });
   };
 
   useEffect(() => {
@@ -31,7 +35,7 @@ const CreateVenue = () => {
   }, [venueId]);
 
   return (
-    <main className="size-full min-h-screen overflow-x-hidden text-white relative pt-10 pb-28 flex flex-col gap-10 ">
+    <main className="size-full min-h-screen overflow-x-hidden text-white relative pt-10 pb-28 flex flex-col gap-10">
       <ModalEditTeam />
       <Overlay />
       <div className="size-full px-36 flex pt-20 gap-14 max-lg:px-10 ">
@@ -52,6 +56,11 @@ const CreateVenue = () => {
         </div>
       </div>
       <Teams />
+      {loading && (
+        <div className="size-full absolute top-0 left-0 backdrop-blur-md flex items-center justify-center gap-2 pointer-events-none">
+          <FaSpinner className="animate-spin" /> Loading...
+        </div>
+      )}
     </main>
   );
 };
