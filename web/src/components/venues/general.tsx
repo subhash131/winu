@@ -10,6 +10,7 @@ import { formatEndDate } from "@/helpers/format-end-date";
 import { toast } from "sonner";
 import { CopyIcon } from "lucide-react";
 import { IoMdClose } from "react-icons/io";
+import Link from "next/link";
 
 const General = ({
   venue,
@@ -20,8 +21,6 @@ const General = ({
   setFantasyTeam: React.Dispatch<React.SetStateAction<TPlayer[]>>;
   fantasyTeam: TPlayer[];
 }) => {
-  const venueId = useSearchParams().get("venue");
-
   if (!venue) return;
 
   return (
@@ -64,9 +63,13 @@ const General = ({
               <CopyIcon size={20} className="text-active" />
             </button>
           </div>
-          <p className="font-medium text-sm">
+          <Link
+            href={venue.streamLink}
+            className="font-medium text-sm"
+            target="_blank"
+          >
             STREAM LINK : {venue.streamLink}
-          </p>
+          </Link>
           <p className="font-medium text-sm">POOL SIZE : 100,000</p>
           <p className="font-medium text-sm">BID AMOUNT : 1 SOL</p>
           <p className="font-medium text-sm">1st PRIZE : 10,000 SOL</p>
@@ -96,7 +99,7 @@ const General = ({
                   <p className="text-xl underline">{team.name}</p>
                 </div>
                 <div className="flex flex-col gap-2 pb-4">
-                  {team.players.map(({ imageUrl, username, _id, points, }) => {
+                  {team.players.map(({ imageUrl, username, _id, points }) => {
                     return (
                       <div
                         className="pl-6 font-normal flex items-center gap-2 cursor-pointer"
