@@ -2,7 +2,7 @@
 
 Welcome to WINU, the ultimate fantasy gaming platform designed for esports enthusiasts! Build your dream teams, place bids, and compete for exciting prizes in a secure, crypto-powered environment.
 
-Live link: https://thewinu.vercel.app/
+Live link: https://thewinu.vercel.app
 
 ## Table of Contents
 
