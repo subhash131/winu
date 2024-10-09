@@ -11,7 +11,7 @@ import SolanaProvider from "@/providers/contract-provider";
 
 export const metadata: Metadata = {
   title: "Winu",
-  description: "Play and Earn with Fantasy e-sports games",
+  description: "Play and Earn with Fantasy e-sport games",
 };
 
 const poppins = Poppins({
