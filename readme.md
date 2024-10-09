@@ -67,6 +67,7 @@ To use WINU, follow these steps:
 - Backend(Off-Chain): Mongodb
 - Frontend: Next JS(Typescript)
 - State management: Redux toolkit
+- Asset management: Edge Store
 
 ## Contributing
 
