@@ -35,7 +35,7 @@ To use WINU, follow these steps:
 
 ### Hosting a Tournament
 
-1. Log in to your account as a host.
+1. Log in to your account as a host(make sure you are connected with Host wallet).
 2. Navigate to the create section.
 3. Fill in the tournament details.
 4. Add teams.
@@ -43,12 +43,17 @@ To use WINU, follow these steps:
 
 ### Creating a Team
 
-1. Log in to your account.
+1. Log in to your account (make sure you are connected with Bidder wallet).
 2. Navigate to Home.
 3. Select the tournament.
 4. Select your preferred players from the available list.
 5. Confirm your team selection.
 6. Place Bid (limited to **1 SOL** for simplicity).
+
+### IMPORTANT⚠️
+
+> **Note:** The app expects at least **5 bids** to end the game.
+
 
 ## Bidding System
 
@@ -57,9 +62,6 @@ To use WINU, follow these steps:
 - The **platform owner** (me) receives **10%** of the pool.
 - **5%** is reserved for transaction fees.
 
-### IMPORTANT⚠️
-
-> **Note:** The app expects at least **5 bids** to end the game.
 
 ## Technical Details
 
