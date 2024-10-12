@@ -10,7 +10,7 @@ Live link: https://thewinu.vercel.app
 - [Getting Started](#getting-started)
 - [How to Use the App](#how-to-use-the-app)
 - [Hosting a Tournament](#hosting-a-tournament)
-- [Creating a Team/Bidding](#creating-a-team)
+- [Place a bid](#place-a-bid)
 - [Ending the Game](#ending-the-game)
 - [Claim rewards](#claim-rewards)
 - 
@@ -45,7 +45,7 @@ To use WINU, follow these steps:
 4. Add teams.
 5. Save.
 
-### Creating a Team
+### Place a bid
 
 1. Log in to your account (make sure you are connected with Bidder wallet).
 2. Navigate to Home.
@@ -57,6 +57,7 @@ To use WINU, follow these steps:
 ### IMPORTANT⚠️
 
 > **Note:** The app expects at least **5 bids** to end the game.
+> **For Testing:** Repeat the [Place a bid](#place-a-bid) instruction atleast 5 times.
 
 ### Ending the Game
 1. Log in to your account as a host(make sure you are connected with Host wallet).
