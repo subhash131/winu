@@ -37,7 +37,7 @@ To use WINU, follow these steps:
 ## How to Use the App
 
 ### Hosting a Tournament
-
+[Watch Video](https://youtu.be/fn7DSIvE8Kw?feature=shared)
 1. Log in to your account as a host(make sure you are connected with Host wallet).
 2. Navigate to the create section.
 3. Fill in the tournament details.
@@ -45,7 +45,7 @@ To use WINU, follow these steps:
 5. Save.
 
 ### Place a bid
-
+[Watch Video](https://youtu.be/tocOvQamyOc?feature=shared)
 1. Log in to your account (make sure you are connected with Bidder wallet).
 2. Navigate to Home.
 3. Select the tournament.
@@ -77,7 +77,6 @@ To use WINU, follow these steps:
 
 
 ## Bidding System
-
 - The **host** receives **35%** of the pool.
 - The **winner** receives **50%** of the pool.
 - The **platform** (WINU) receives **10%** of the pool.
@@ -85,7 +84,6 @@ To use WINU, follow these steps:
 
 
 ## Technical Details
-
 - Built on the **Solana** blockchain for fast and secure transactions.
 - Backend(Off-Chain): Mongodb
 - Frontend: Next JS(Typescript)
@@ -93,7 +91,6 @@ To use WINU, follow these steps:
 - Asset management: Edge Store
 
 ## Contributing
-
 Contributions are welcome! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
 
 ---
