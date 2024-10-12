@@ -13,7 +13,6 @@ Live link: https://thewinu.vercel.app
 - [Place a bid](#place-a-bid)
 - [Ending the Game](#ending-the-game)
 - [Claim rewards](#claim-rewards)
-- 
 - [Bidding System](#bidding-system)
 - [Technical Details](#technical-details)
 - [Contributing](#contributing)
