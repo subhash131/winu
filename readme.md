@@ -10,7 +10,10 @@ Live link: https://thewinu.vercel.app
 - [Getting Started](#getting-started)
 - [How to Use the App](#how-to-use-the-app)
 - [Hosting a Tournament](#hosting-a-tournament)
-- [Creating a Team](#creating-a-team)
+- [Creating a Team/Bidding](#creating-a-team)
+- [Ending the Game](#ending-the-game)
+- [Claim rewards](#claim-rewards)
+- 
 - [Bidding System](#bidding-system)
 - [Technical Details](#technical-details)
 - [Contributing](#contributing)
@@ -55,12 +58,29 @@ To use WINU, follow these steps:
 
 > **Note:** The app expects at least **5 bids** to end the game.
 
+### Ending the Game
+1. Log in to your account as a host(make sure you are connected with Host wallet).
+2. Navigate to My Venues.
+3. select the venue.
+4. Click on Manage
+5. Update the results.
+6. Click on End Game.
+7. The transaction will credit the **Host** with 35% of the pool and the **Platform (WINU)** with 10% of the pool.
+
+### Claim rewards
+1. Once the venue ends, navigate to the Leader board and check the winner.
+2. Log in to your account (make sure you are connected with Bidder wallet).
+3. Navigate to My Bids.
+4. If your team has made it to the top, you will see an option to claim your reward.
+5. Click on Claim reward.
+6. The transaction will credit the **Winner** with 50% of the pool.
+
 
 ## Bidding System
 
 - The **host** receives **35%** of the pool.
 - The **winner** receives **50%** of the pool.
-- The **platform owner** (me) receives **10%** of the pool.
+- The **platform** (WINU) receives **10%** of the pool.
 - **5%** is reserved for transaction fees.
 
 
